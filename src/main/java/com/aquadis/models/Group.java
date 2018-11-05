@@ -1,10 +1,7 @@
 package com.aquadis.models;
 
 import javax.json.bind.annotation.JsonbTransient;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +9,12 @@ import java.util.List;
  * @author Lorenzo
  */
 @Entity
+@Table(name = "Group")
 public class Group {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue
     private int id;
 
     @Column(name = "name")
@@ -25,8 +24,13 @@ public class Group {
     @Column(name = "group_admin")
     private User groupAdmin;
 
+    // TODO: check check
     @JsonbTransient
     @Transient
+    @JoinTable(name = "Group",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private List<User> users;
 
     public Group() {

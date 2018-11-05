@@ -13,6 +13,7 @@ public class User {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue // auto-increment
     private int id;
 
     @Column(name = "email")
@@ -33,7 +34,13 @@ public class User {
     @Column(name = "is_admin")
     private int isAdmin = 0;
 
+    // TODO: check check
     @Transient // Doesn't use this attribute for the database, only locally
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "User",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id")
+    )
     private List<Group> groups;
 
     public User() {

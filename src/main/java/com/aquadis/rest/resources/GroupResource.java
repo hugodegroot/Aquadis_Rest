@@ -53,7 +53,6 @@ public class GroupResource {
     @Path("{groupID}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getGroupFromUser(@PathParam("userID") int userID, @PathParam("groupID") int groupID) {
-        //TODO: get group from a user!
 
         Group group = service.getGroupFromId(userID, groupID);
 

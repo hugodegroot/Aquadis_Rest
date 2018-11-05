@@ -30,7 +30,7 @@ public interface RepositoryService {
      *
      * @param user
      */
-    void addUser(User user);
+    User addUser(User user);
 
     /**
      * Getting all group of a user
@@ -46,4 +46,6 @@ public interface RepositoryService {
      * @return a group
      */
     Group getGroupFromId(int userID, int groupID);
+
+    Group addGroup(User user, Group group);
 }

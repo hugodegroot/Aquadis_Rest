@@ -4,6 +4,10 @@ import com.aquadis.models.Group;
 import com.aquadis.models.User;
 import com.aquadis.service.RepositoryService;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -13,6 +17,8 @@ import java.util.Map;
  * @author Lorenzo
  */
 public class RepositoryServiceImpl implements RepositoryService {
+
+    private EntityManagerFactory entityManagerFactory;
 
     // A singleton reference
     private static RepositoryServiceImpl instance;
@@ -32,32 +38,84 @@ public class RepositoryServiceImpl implements RepositoryService {
     private Map<Integer, User> elements;
 
     private RepositoryServiceImpl() {
-        elements = new LinkedHashMap<>();
+        // TODO: database connection
+        entityManagerFactory = Persistence.createEntityManagerFactory("");
+    }
+
+    private EntityManager getEntityManager(){
+        return entityManagerFactory.createEntityManager();
     }
 
     @Override
     public List<User> getAllUsers() {
-        return new ArrayList<>(elements.values());
+        EntityManager entityManager = getEntityManager();
+
+        // TODO: get correct query
+        List<User> users = entityManager.createQuery("").getResultList();
+
+        entityManager.close();
+
+        return users;
     }
 
     @Override
     public User getUserFromId(int userID) {
-        return elements.get(userID);
+        EntityManager entityManager = getEntityManager();
+
+        User user = entityManager.find(User.class, userID);
+
+        entityManager.close();
+
+        return user;
     }
 
     @Override
-    public void addUser(User user) {
-        elements.put(user.getId(), user);
+    public User addUser(User user) {
+        EntityManager entityManager = getEntityManager();
+
+        // Adds a user to the database
+        entityManager.getTransaction().begin();
+        entityManager.persist(user);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
+        return user;
     }
 
     @Override
-    public List<Group> getGroupsFromUser(int userID) {
-        return elements.get(userID).getGroups();
+    public List<Group> getGroupsFromUser(User user) {
+        EntityManager entityManager = getEntityManager();
+
+        // TODO: fix query
+        Query query = entityManager.createQuery(""); // TODO: userID as paramater!!
+        query.setParameter("userID", user.getId());
+
+        List<Group> groups = query.getResultList();
+
+        entityManager.close();
+
+        return groups;
     }
 
     @Override
     public Group getGroupFromId(int userID, int groupID) {
         return elements.get(userID).getGroup(groupID);
+    }
+
+    @Override
+    public Group addGroup(User user, Group group){
+        user.addGroup(group);
+
+        EntityManager entityManager = getEntityManager();
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(group);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
+        return group;
     }
 
     private void loadExamples() {
