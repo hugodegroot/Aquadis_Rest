@@ -119,13 +119,13 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     private void loadExamples() {
-        User luuk = new User(1, "luuk123@hotmail.nl", "luuk", "Luuk", "Goedhart", "luuk123");
+        User luuk = new User("luuk123@hotmail.nl", "luuk", "Luuk", "Goedhart", "luuk123", 1);
         addUser(luuk);
-        User lorenzo = new User(2, "lkorn.9520@gmail.com", "ALLIGAT0R_BL00D", "Lorenzo", "Korn", "lorenzo123");
+        User lorenzo = new User("lkorn.9520@gmail.com", "ALLIGAT0R_BL00D", "Lorenzo", "Korn", "lorenzo123", 1);
         addUser(lorenzo);
-        User janWillem = new User(3, "jwvbremen@hotmail.nl", "PhyrexAlianza", "JW", "van Bremen", "jw123");
+        User janWillem = new User("jwvbremen@hotmail.nl", "PhyrexAlianza", "JW", "van Bremen", "jw123", 0);
         addUser(janWillem);
-        User hugo = new User(4, "hugo123@outlook.nl", "hugo1997", "Hugo", "de Groot", "hugo123");
+        User hugo = new User("hugo123@outlook.nl", "hugo1997", "Hugo", "de Groot", "hugo123", 0);
         addUser(hugo);
 
         Group group1 = new Group(1, "ALLIGAT0R_BL00D's group", lorenzo);

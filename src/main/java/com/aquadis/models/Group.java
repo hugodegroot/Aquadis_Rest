@@ -1,6 +1,5 @@
 package com.aquadis.models;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +19,11 @@ public class Group {
     @Column(name = "name")
     private String name;
 
-    @JsonbTransient // Doesn't show in the JSON object
     @Column(name = "group_admin")
     @Transient
     private User groupAdmin;
 
     // TODO: check check
-    @JsonbTransient
     @Transient
     @JoinTable(name = "Group",
             joinColumns = @JoinColumn(name = "group_id"),

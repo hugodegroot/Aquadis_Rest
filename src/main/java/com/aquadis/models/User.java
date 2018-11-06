@@ -46,13 +46,13 @@ public class User {
     public User() {
     }
 
-    public User(int id, String email, String userName, String firstName, String lastName, String password) {
-        setId(id);
+    public User(String email, String userName, String firstName, String lastName, String password, int isAdmin) {
         setEmail(email);
         setUserName(userName);
         setFirstName(firstName);
         setLastName(lastName);
         setPassword(password);
+        setAdminStatus(isAdmin);
         setGroups(new ArrayList<Group>());
     }
 
