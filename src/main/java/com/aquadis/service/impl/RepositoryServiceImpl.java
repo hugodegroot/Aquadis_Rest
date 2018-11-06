@@ -75,7 +75,7 @@ public class RepositoryServiceImpl implements RepositoryService {
 
         // Adds a user to the database
         entityManager.getTransaction().begin();
-        entityManager.persist(user);
+        entityManager.merge(user);
         entityManager.getTransaction().commit();
 
         entityManager.close();
@@ -110,7 +110,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         EntityManager entityManager = getEntityManager();
 
         entityManager.getTransaction().begin();
-        entityManager.persist(group);
+        entityManager.merge(group);
         entityManager.getTransaction().commit();
 
         entityManager.close();

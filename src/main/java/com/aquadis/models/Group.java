@@ -22,6 +22,7 @@ public class Group {
 
     @JsonbTransient // Doesn't show in the JSON object
     @Column(name = "group_admin")
+    @Transient
     private User groupAdmin;
 
     // TODO: check check

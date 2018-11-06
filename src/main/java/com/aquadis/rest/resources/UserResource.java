@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author Lorenzo
  */
-@Path("users")
+@Path("/users")
 public class UserResource {
 
     private RepositoryService service;

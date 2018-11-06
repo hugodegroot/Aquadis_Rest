@@ -3,7 +3,7 @@ package com.aquadis.config;
 import javax.ejb.Stateless;
 
 @javax.annotation.sql.DataSourceDefinition(
-        name = "java:comp/env/jdbc/aquadisDb",
+        name = "java:global/jdbc/aquadisDB",
         className = "com.mysql.cj.jdbc.MysqlXADataSource",
         url = "jdbc:mysql://oege.ie.hva.nl:3306/zgoedhal0031?createDatabaseIfNotExist=true&serverTimezone=CET",
         user = "goedhal0031",
