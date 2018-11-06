@@ -8,7 +8,7 @@ import java.util.List;
  * @author Lorenzo
  */
 @Entity
-@Table(name = "user")
+@Table(name = "User")
 public class User {
 
     @Id

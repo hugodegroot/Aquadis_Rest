@@ -39,7 +39,7 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     private RepositoryServiceImpl() {
         // TODO: database connection
-        entityManagerFactory = Persistence.createEntityManagerFactory("");
+        entityManagerFactory = Persistence.createEntityManagerFactory("aquadisPU");
     }
 
     private EntityManager getEntityManager(){
@@ -51,7 +51,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         EntityManager entityManager = getEntityManager();
 
         // TODO: get correct query
-        List<User> users = entityManager.createQuery("").getResultList();
+        List<User> users = entityManager.createQuery("SELECT u from User u").getResultList();
 
         entityManager.close();
 

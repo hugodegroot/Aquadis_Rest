@@ -36,17 +36,18 @@ public class GroupResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllGroups(@PathParam("userID") int userID) {
-        User user = service.getUserFromId(userID);
-
-        if (user == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity(new ClientError("Cannot find user with id: " + userID)).build();
-        }
-
-        List<Group> groups = service.getGroupsFromUser(userID);
-
-        return Response.status(Response.Status.OK)
-                .entity(groups).build();
+//        User user = service.getUserFromId(userID);
+//
+//        if (user == null) {
+//            return Response.status(Response.Status.NOT_FOUND)
+//                    .entity(new ClientError("Cannot find user with id: " + userID)).build();
+//        }
+//
+//        List<Group> groups = service.getGroupsFromUser(userID);
+//
+//        return Response.status(Response.Status.OK)
+//                .entity(groups).build();
+        return null;
     }
 
     @GET

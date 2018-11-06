@@ -37,7 +37,7 @@ public interface RepositoryService {
      *
      * @return list of groups
      */
-    List<Group> getGroupsFromUser(int userID);
+    List<Group> getGroupsFromUser(User user);
 
     /**
      * Getting a specific group of a user
