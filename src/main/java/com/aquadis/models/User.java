@@ -1,6 +1,7 @@
 package com.aquadis.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,12 +36,7 @@ public class User {
     private int isAdmin = 0;
 
     // TODO: check check
-    @Transient // Doesn't use this attribute for the database, only locally
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "User",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id")
-    )
+    @Transient
     private List<Group> groups;
 
     public User() {
@@ -112,9 +108,9 @@ public class User {
         this.isAdmin = status;
     }
 
-    public Group getGroup(int groupID){
+    public Group getGroup(int groupID) {
         for (Group group : groups) {
-            if (group.getId() == groupID){
+            if (group.getId() == groupID) {
                 return group;
             }
         }
@@ -130,7 +126,7 @@ public class User {
         return groups;
     }
 
-    private void setGroups(List<Group> groups){
+    private void setGroups(List<Group> groups) {
         this.groups = groups;
     }
 }

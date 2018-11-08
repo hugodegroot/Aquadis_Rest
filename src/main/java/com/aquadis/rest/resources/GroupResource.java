@@ -28,7 +28,7 @@ public class GroupResource {
 
     /**
      * Returns a list with all the groups of a user
-     * at: http://localhost:8080/aquadis-1.0-SNAPSHOT/aquadis/users/{userID}/groups
+     * at: http://localhost:8080/aquadis/rest/users/{userID}/groups
      *
      * @param userID
      * @return list of groups of a user
@@ -36,20 +36,27 @@ public class GroupResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllGroups(@PathParam("userID") int userID) {
-//        User user = service.getUserFromId(userID);
-//
-//        if (user == null) {
-//            return Response.status(Response.Status.NOT_FOUND)
-//                    .entity(new ClientError("Cannot find user with id: " + userID)).build();
-//        }
-//
-//        List<Group> groups = service.getGroupsFromUser(userID);
-//
-//        return Response.status(Response.Status.OK)
-//                .entity(groups).build();
-        return null;
+        User user = service.getUserFromId(userID);
+
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ClientError("Cannot find user with id: " + userID)).build();
+        }
+
+        List<Group> groups = service.getGroupsFromUser(user);
+
+        return Response.status(Response.Status.OK)
+                .entity(groups).build();
     }
 
+    /**
+     * Returns a specific group object based on its ID.
+     * at: http://localhost:8080/aquadis/rest/users/{userID}/groups/{groupID}
+     *
+     * @param userID
+     * @param groupID
+     * @return
+     */
     @GET
     @Path("{groupID}")
     @Produces(MediaType.APPLICATION_JSON)

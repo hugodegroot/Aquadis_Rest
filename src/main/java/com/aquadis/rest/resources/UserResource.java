@@ -24,7 +24,7 @@ public class UserResource {
 
     /**
      * Return a list of all the user objects.
-     * at: http://localhost:8080/aquadis-1.0-SNAPSHOT/aquadis/users
+     * at: http://localhost:8080/aquadis/rest/users
      *
      * @return user objects list
      */
@@ -36,7 +36,7 @@ public class UserResource {
 
     /**
      * Returns a specific user object based on its ID.
-     * at: http://localhost:8080/aquadis-1.0-SNAPSHOT/aquadis/users/{userID}
+     * at: http://localhost:8080/aquadis/rest/users/{userID}
      *
      * @param userID
      * @return user object
@@ -60,15 +60,12 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public User addUser(User user){
-
-        User newUser = service.addUser(user);
-
-        return newUser;
+        return service.addUser(user);
     }
 
     /**
      * Returns a group resource
-     * at: http://localhost:8080/aquadis-1.0-SNAPSHOT/aquadis/users/{userID}/groups
+     * at: http://localhost:8080/aquadis/rest/users/{userID}/groups
      *
      * @return a new group resource
      */

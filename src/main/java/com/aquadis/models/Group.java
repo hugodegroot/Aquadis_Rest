@@ -25,18 +25,13 @@ public class Group {
 
     // TODO: check check
     @Transient
-    @JoinTable(name = "Group",
-            joinColumns = @JoinColumn(name = "group_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
     private List<User> users;
 
     public Group() {
 
     }
 
-    public Group(int id, String name, User groupAdmin) {
-        setId(id);
+    public Group(String name, User groupAdmin) {
         setName(name);
         setGroupAdmin(groupAdmin);
         setUsers(new ArrayList<User>(), groupAdmin);
