@@ -23,7 +23,7 @@ public class Group {
     @Transient
     private User groupAdmin;
 
-    // TODO: check check
+    // TODO: many to many
     @Transient
     private List<User> users;
 

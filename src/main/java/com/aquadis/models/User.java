@@ -35,7 +35,7 @@ public class User {
     @Column(name = "is_admin")
     private int isAdmin = 0;
 
-    // TODO: check check
+    // TODO: many to many
     @Transient
     private List<Group> groups;
 

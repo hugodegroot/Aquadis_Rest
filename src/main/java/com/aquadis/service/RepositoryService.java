@@ -26,7 +26,7 @@ public interface RepositoryService {
     User getUserFromId(int userID);
 
     /**
-     * Adding a user
+     * Adding a user into the database
      *
      * @param user
      */
@@ -47,5 +47,12 @@ public interface RepositoryService {
      */
     Group getGroupFromId(int userID, int groupID);
 
+    /**
+     * Adding a group to a user into the database
+     *
+     * @param user
+     * @param group
+     * @return
+     */
     Group addGroup(User user, Group group);
 }
