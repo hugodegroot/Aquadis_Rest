@@ -38,7 +38,7 @@ public class UserResource {
      * Returns a specific user object based on its ID.
      * at: http://localhost:8080/aquadis/rest/users/{userID}
      *
-     * @param userID
+     * @param userID specific user
      * @return user object
      */
     @GET
@@ -59,8 +59,8 @@ public class UserResource {
     /**
      * Adds a user to the database
      *
-     * @param user
-     * @return
+     * @param user speific user
+     * @return added user
      */
     @POST
     @Path("/")

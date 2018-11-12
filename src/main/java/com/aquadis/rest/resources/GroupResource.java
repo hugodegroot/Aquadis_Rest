@@ -27,7 +27,7 @@ public class GroupResource {
      * Returns a list with all the groups of a user
      * at: http://localhost:8080/aquadis/rest/users/{userID}/groups
      *
-     * @param userID
+     * @param userID specific user
      * @return list of groups of a user
      */
     @GET
@@ -50,9 +50,9 @@ public class GroupResource {
      * Returns a specific group object based on its ID.
      * at: http://localhost:8080/aquadis/rest/users/{userID}/groups/{groupID}
      *
-     * @param userID
-     * @param groupID
-     * @return
+     * @param userID specific user
+     * @param groupID specific group
+     * @return group
      */
     @GET
     @Path("{groupID}")
@@ -74,8 +74,8 @@ public class GroupResource {
     /**
      * Adds a group to the database
      *
-     * @param group
-     * @return
+     * @param group specific group
+     * @return added group
      */
     @POST
     @Path("/")
