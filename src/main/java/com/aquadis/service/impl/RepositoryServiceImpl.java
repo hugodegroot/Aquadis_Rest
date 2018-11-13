@@ -99,23 +99,15 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Group getGroupFromId(int userID, int groupID) {
-        return elements.get(userID).getGroup(groupID);
+        return null;
     }
 
+    // TODO: refactor
     @Override
-    public Group addGroup(User user, Group group) {
-        user.addGroup(group);
-
-        EntityManager entityManager = getEntityManager();
-
-        entityManager.getTransaction().begin();
-        entityManager.persist(group);
-        entityManager.getTransaction().commit();
-
-        entityManager.close();
-
-        return group;
+    public Group addGroup(int userID, int groupID) {
+        return null;
     }
+
 
     private void loadExamples() {
 //        User luuk = new User("luuk123@hotmail.nl", "luuk", "Luuk", "Goedhart", "luuk123", 1);

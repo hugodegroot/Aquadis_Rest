@@ -59,11 +59,11 @@ public class UserResource {
     /**
      * Adds a user to the database
      *
-     * @param user speific user
+     * @param user specific user
      * @return added user
      */
     @POST
-    @Path("/")
+    @Path("/user")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public User addUser(User user) {

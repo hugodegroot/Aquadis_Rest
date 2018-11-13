@@ -24,8 +24,8 @@ public class Group {
     private User groupAdmin;
 
     // TODO: many to many
-    @Transient
-    private List<User> users;
+    @OneToMany
+    private List<UserGroup> users;
 
     public Group() {
 
@@ -61,18 +61,18 @@ public class Group {
         this.groupAdmin = groupAdmin;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
+//    public List<User> getUsers() {
+//        return users;
+//    }
 
     public void addUser(User user) {
-        users.add(user);
-        user.addGroup(this);
+//        users.add(user);
+//        user.addGroup(this);
     }
 
     private void setUsers(List<User> users, User groupAdmin) {
-        this.users = users;
-        this.users.add(groupAdmin);
-        groupAdmin.addGroup(this);
+//        this.users = users;
+//        this.users.add(groupAdmin);
+//        groupAdmin.addGroup(this);
     }
 }

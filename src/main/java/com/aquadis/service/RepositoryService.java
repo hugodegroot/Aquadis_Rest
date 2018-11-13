@@ -50,9 +50,9 @@ public interface RepositoryService {
     /**
      * Adding a group to a user into the database
      *
-     * @param user
-     * @param group
+     * @param userID
+     * @param groupID
      * @return
      */
-    Group addGroup(User user, Group group);
+    Group addGroup(int userID, int groupID);
 }

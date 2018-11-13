@@ -1,7 +1,6 @@
 package com.aquadis.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class User {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue // auto-increment
+    @GeneratedValue
     private int id;
 
     @Column(name = "email")
@@ -36,8 +35,8 @@ public class User {
     private int isAdmin = 0;
 
     // TODO: many to many
-    @Transient
-    private List<Group> groups;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<UserGroup> groups;
 
     public User() {
     }
@@ -49,7 +48,7 @@ public class User {
         setLastName(lastName);
         setPassword(password);
         setAdminStatus(isAdmin);
-        setGroups(new ArrayList<Group>());
+//        setGroups(new ArrayList<Group>());
     }
 
     public String getEmail() {
@@ -108,25 +107,24 @@ public class User {
         this.isAdmin = status;
     }
 
-    public Group getGroup(int groupID) {
-        for (Group group : groups) {
-            if (group.getId() == groupID) {
-                return group;
-            }
-        }
-
-        return null;
-    }
-
-    public void addGroup(Group group) {
-        groups.add(group);
-    }
-
-    public List<Group> getGroups() {
+    public List<UserGroup> getGroups() {
         return groups;
     }
 
-    private void setGroups(List<Group> groups) {
+    public void setGroups(List<UserGroup> groups) {
         this.groups = groups;
     }
+
+
+//    public void addGroup(Group group) {
+//        groups.add(group);
+//    }
+
+//    public List<Group> getGroups() {
+//        return groups;
+//    }
+
+//    private void setGroups(List<Group> groups) {
+//        this.groups = groups;
+//    }
 }
