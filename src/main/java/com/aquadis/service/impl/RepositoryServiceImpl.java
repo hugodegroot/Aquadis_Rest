@@ -36,7 +36,6 @@ public class RepositoryServiceImpl implements RepositoryService {
     private Map<Integer, User> elements;
 
     private RepositoryServiceImpl() {
-        // TODO: database connection
         entityManagerFactory = Persistence.createEntityManagerFactory("aquadisPU");
     }
 
@@ -84,10 +83,9 @@ public class RepositoryServiceImpl implements RepositoryService {
     public List<Group> getGroupsFromUser(User user) {
         EntityManager entityManager = getEntityManager();
 
-        // TODO: fix query, so that all the groups are shown
-        // TODO: what is wrong with this?
-        Query query = entityManager.createQuery("SELECT g FROM Group g " +
-                "INNER JOIN User_Group ug ON g.id = ug.group_id WHERE ug.user_id = :userID");
+        // TODO: usergroups link with group class?
+        // TODO: This correct?
+        Query query = entityManager.createQuery("SELECT u.groups FROM User u WHERE u.id = :userID");
         query.setParameter("userID", user.getId());
 
         List<Group> groups = query.getResultList();
@@ -99,25 +97,43 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Group getGroupFromId(int userID, int groupID) {
-        return null;
+        EntityManager entityManager = getEntityManager();
+
+        // TODO: Is this correct?
+        Query query = entityManager.createQuery("SELECT u.groups FROM User u WHERE Group.id = :groupID");
+        query.setParameter("groupID", groupID);
+
+        Group group = (Group) query.getSingleResult();
+
+        return group;
     }
 
-    // TODO: refactor
+    // TODO: how do add a group to a specific user?
     @Override
-    public Group addGroup(int userID, int groupID) {
-        return null;
+    public Group addGroup(int userID, Group group) {
+        User user = getUserFromId(userID);
+
+        EntityManager entityManager = getEntityManager();
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(group);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
+        return group;
     }
 
 
     private void loadExamples() {
-//        User luuk = new User("luuk123@hotmail.nl", "luuk", "Luuk", "Goedhart", "luuk123", 1);
-//        addUser(luuk);
-//        User lorenzo = new User("lkorn.9520@gmail.com", "ALLIGAT0R_BL00D", "Lorenzo", "Korn", "lorenzo123", 1);
-//        addUser(lorenzo);
-//        User janWillem = new User("jwvbremen@hotmail.nl", "PhyrexAlianza", "JW", "van Bremen", "jw123", 0);
-//        addUser(janWillem);
-//        User hugo = new User("hugo123@outlook.nl", "hugo1997", "Hugo", "de Groot", "hugo123", 0);
-//        addUser(hugo);
+        User luuk = new User("luuk123@hotmail.nl", "luuk", "Luuk", "Goedhart", "luuk123", 1);
+        addUser(luuk);
+        User lorenzo = new User("lkorn.9520@gmail.com", "ALLIGAT0R_BL00D", "Lorenzo", "Korn", "lorenzo123", 1);
+        addUser(lorenzo);
+        User janWillem = new User("jwvbremen@hotmail.nl", "PhyrexAlianza", "JW", "van Bremen", "jw123", 0);
+        addUser(janWillem);
+        User hugo = new User("hugo123@outlook.nl", "hugo1997", "Hugo", "de Groot", "hugo123", 0);
+        addUser(hugo);
 
 //        Group group1 = new Group("ALLIGAT0R_BL00D's group", lorenzo);
 //        group1.addUser(luuk);

@@ -1,7 +1,5 @@
 package com.aquadis.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity

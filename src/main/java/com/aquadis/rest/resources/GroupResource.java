@@ -78,10 +78,10 @@ public class GroupResource {
      * @return added group
      */
     @POST
-    @Path("/addGroup")
+    @Path("/group")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Group addGroup(@PathParam("userID") int userID, @PathParam("groupID") int groupID) {
-        return service.addGroup(userID, groupID);
+    public Group addGroup(@PathParam("userID") int userID, Group group) {
+        return service.addGroup(userID, group);
     }
 }

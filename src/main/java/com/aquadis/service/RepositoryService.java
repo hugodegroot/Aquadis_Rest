@@ -51,8 +51,8 @@ public interface RepositoryService {
      * Adding a group to a user into the database
      *
      * @param userID
-     * @param groupID
+     * @param group
      * @return
      */
-    Group addGroup(int userID, int groupID);
+    Group addGroup(int userID, Group group);
 }
