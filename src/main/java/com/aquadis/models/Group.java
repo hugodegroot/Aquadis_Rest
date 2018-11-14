@@ -1,40 +1,32 @@
 package com.aquadis.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Lorenzo
  */
 @Entity
-@Table(name = "Group")
+@Table(name = "tb_Group")
 public class Group {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "group_admin")
-    @Transient
-    private User groupAdmin;
-
-    // TODO: many to many
-    @OneToMany
+    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
     private List<UserGroup> users;
 
     public Group() {
 
     }
 
-    public Group(String name, User groupAdmin) {
+    public Group(String name) {
         setName(name);
-        setGroupAdmin(groupAdmin);
-        setUsers(new ArrayList<User>(), groupAdmin);
     }
 
     public int getId() {
@@ -53,26 +45,11 @@ public class Group {
         this.name = name;
     }
 
-    public User getGroupAdmin() {
-        return groupAdmin;
+    public List<UserGroup> getUsers() {
+        return users;
     }
 
-    private void setGroupAdmin(User groupAdmin) {
-        this.groupAdmin = groupAdmin;
-    }
-
-//    public List<User> getUsers() {
-//        return users;
-//    }
-
-    public void addUser(User user) {
-//        users.add(user);
-//        user.addGroup(this);
-    }
-
-    private void setUsers(List<User> users, User groupAdmin) {
-//        this.users = users;
-//        this.users.add(groupAdmin);
-//        groupAdmin.addGroup(this);
+    public void setUsers(List<UserGroup> users) {
+        this.users = users;
     }
 }

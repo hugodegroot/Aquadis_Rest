@@ -1,7 +1,6 @@
 package com.aquadis.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ public class User {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "email")
@@ -34,8 +33,7 @@ public class User {
     @Column(name = "is_admin")
     private int isAdmin = 0;
 
-    // TODO: many to many
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
     private List<UserGroup> groups;
 
     public User() {
@@ -48,7 +46,6 @@ public class User {
         setLastName(lastName);
         setPassword(password);
         setAdminStatus(isAdmin);
-//        setGroups(new ArrayList<Group>());
     }
 
     public String getEmail() {
@@ -103,7 +100,7 @@ public class User {
         return isAdmin;
     }
 
-    public void setAdminStatus(int status) {
+    private void setAdminStatus(int status) {
         this.isAdmin = status;
     }
 
@@ -114,17 +111,4 @@ public class User {
     public void setGroups(List<UserGroup> groups) {
         this.groups = groups;
     }
-
-
-//    public void addGroup(Group group) {
-//        groups.add(group);
-//    }
-
-//    public List<Group> getGroups() {
-//        return groups;
-//    }
-
-//    private void setGroups(List<Group> groups) {
-//        this.groups = groups;
-//    }
 }
