@@ -76,7 +76,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     public List<UserGroup> getAllUserGroupsFromUser(int userID) {
         EntityManager entityManager = getEntityManager();
 
-        Query query = entityManager.createQuery("SELECT u.groups FROM User u INNER JOIN u.groups WHERE u.id = :userID");
+        Query query = entityManager.createQuery("SELECT ug.group.id, ug.group.name FROM UserGroup ug WHERE ug.user.id = :userID");
         query.setParameter("userID", userID);
 
         List<UserGroup> userGroups = query.getResultList();
@@ -147,7 +147,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         EntityManager entityManager = getEntityManager();
 
         entityManager.getTransaction().begin();
-        entityManager.merge(object);
+        entityManager.persist(object);
         entityManager.getTransaction().commit();
 
         entityManager.close();
@@ -216,27 +216,26 @@ public class RepositoryServiceImpl implements RepositoryService {
         Group group3 = new Group("Work");
         addGroup(group3);
 
-        // TODO: fix this
         // Adds usergroups
-//        UserGroup usergroup1 = new UserGroup(13, "admin", lorenzo, group1);
-//        addUserGroup(usergroup1);
-//        UserGroup usergroup2 = new UserGroup(5, "member", luuk, group1);
-//        addUserGroup(usergroup2);
-//        UserGroup usergroup3 = new UserGroup(8, "member", janWillem, group1);
-//        addUserGroup(usergroup3);
-//        UserGroup usergroup4 = new UserGroup(19, "admin", luuk, group2);
-//        addUserGroup(usergroup4);
-//        UserGroup usergroup5 = new UserGroup(11, "member", lorenzo, group2);
-//        addUserGroup(usergroup5);
-//        UserGroup usergroup6 = new UserGroup(11, "member", hugo, group2);
-//        addUserGroup(usergroup6);
-//        UserGroup usergroup7 = new UserGroup(11, "admin", janWillem, group3);
-//        addUserGroup(usergroup7);
-//        UserGroup usergroup8 = new UserGroup(11, "member", lorenzo, group3);
-//        addUserGroup(usergroup8);
-//        UserGroup usergroup9 = new UserGroup(11, "member", luuk, group3);
-//        addUserGroup(usergroup9);
-//        UserGroup usergroup10 = new UserGroup(11, "member", hugo, group3);
-//        addUserGroup(usergroup10);
+        UserGroup usergroup1 = new UserGroup(13, "admin", lorenzo, group1);
+        addUserGroup(usergroup1);
+        UserGroup usergroup2 = new UserGroup(5, "member", luuk, group1);
+        addUserGroup(usergroup2);
+        UserGroup usergroup3 = new UserGroup(8, "member", janWillem, group1);
+        addUserGroup(usergroup3);
+        UserGroup usergroup4 = new UserGroup(19, "admin", luuk, group2);
+        addUserGroup(usergroup4);
+        UserGroup usergroup5 = new UserGroup(11, "member", lorenzo, group2);
+        addUserGroup(usergroup5);
+        UserGroup usergroup6 = new UserGroup(4, "member", hugo, group2);
+        addUserGroup(usergroup6);
+        UserGroup usergroup7 = new UserGroup(10, "admin", janWillem, group3);
+        addUserGroup(usergroup7);
+        UserGroup usergroup8 = new UserGroup(1, "member", lorenzo, group3);
+        addUserGroup(usergroup8);
+        UserGroup usergroup9 = new UserGroup(0, "member", luuk, group3);
+        addUserGroup(usergroup9);
+        UserGroup usergroup10 = new UserGroup(0, "member", hugo, group3);
+        addUserGroup(usergroup10);
     }
 }
