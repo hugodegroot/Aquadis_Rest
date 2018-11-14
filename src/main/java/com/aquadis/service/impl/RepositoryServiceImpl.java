@@ -26,7 +26,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     // An instance of the service is created and during class initialisation
     static {
         instance = new RepositoryServiceImpl();
-        instance.loadExamples();
+        //instance.loadExamples();
     }
 
     //  Method to get a reference to the instance (singleton)
