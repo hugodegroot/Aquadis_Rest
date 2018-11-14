@@ -10,6 +10,5 @@ import javax.ejb.Stateless;
         password = "Cc1$m8FubtIzX5")
 @Stateless
 
-// TODO: Make sure that you change the host and credentials to your environment
 public class DataSourceDefinition {
 }
