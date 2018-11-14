@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author Lorenzo
  */
-@Path("/")
+@Path("/groups")
 public class GroupResource {
 
     private RepositoryService service;
@@ -27,61 +27,52 @@ public class GroupResource {
      * Returns a list with all the groups of a user
      * at: http://localhost:8080/aquadis/rest/users/{userID}/groups
      *
-     * @param userID specific user
      * @return list of groups of a user
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllGroups(@PathParam("userID") int userID) {
-        User user = service.getUserFromId(userID);
-
-        if (user == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity(new ClientError("Cannot find user with id: " + userID)).build();
-        }
-
-        List<Group> groups = service.getGroupsFromUser(user);
-
-        return Response.status(Response.Status.OK)
-                .entity(groups).build();
+    public List<Group> getAllGroups() {
+        return service.getAllGroups();
     }
 
     /**
      * Returns a specific group object based on its ID.
-     * at: http://localhost:8080/aquadis/rest/users/{userID}/groups/{groupID}
+     * at: http://localhost:8080/aquadis/rest/groups/{groupID}
      *
-     * @param userID specific user
      * @param groupID specific group
      * @return group
      */
     @GET
-    @Path("{groupID}")
+    @Path("/{groupID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getGroupFromUser(@PathParam("userID") int userID, @PathParam("groupID") int groupID) {
-
-        Group group = service.getGroupFromId(userID, groupID);
+    public Response getUserFromID(@PathParam("groupID") int groupID) {
+        Group group = service.getGroupFromId(groupID);
 
         if (group == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity(new ClientError("Cannot find group with id: " + groupID + ". In user with id: " + userID))
-                    .build();
+                    .entity(new ClientError("Cannot find user with id: " + groupID)).build();
         }
 
         return Response.status(Response.Status.OK)
                 .entity(group).build();
     }
 
+    @GET
+    @Path("/{groupID}/predictions")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPredictionsFromGroup(@PathParam("groupID") int groupID){
+        // TODO: show the predictions of that group
+        return null;
+    }
+
     /**
      * Adds a group to the database
      *
-     * @param group specific group
+     * @param groupID specific group
      * @return added group
      */
-    @POST
-    @Path("/group")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Group addGroup(@PathParam("userID") int userID, Group group) {
-        return service.addGroup(userID, group);
+    @Path("/{groupID}/ug")
+    public UserGroupResource getUserGroupResource(@PathParam("groupID") int groupID) {
+        return new UserGroupResource();
     }
 }

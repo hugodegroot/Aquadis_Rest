@@ -76,8 +76,8 @@ public class UserResource {
      *
      * @return a new group resource
      */
-    @Path("/{userID}/groups")
-    public GroupResource getGroupResource() {
-        return new GroupResource();
+    @Path("/{userID}/ug")
+    public UserGroupResource getUserGroupResource() {
+        return new UserGroupResource();
     }
 }
