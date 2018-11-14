@@ -76,7 +76,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     public List<UserGroup> getAllUserGroupsFromUser(int userID) {
         EntityManager entityManager = getEntityManager();
 
-        Query query = entityManager.createQuery("SELECT ug.group.id, ug.group.name FROM UserGroup ug WHERE ug.user.id = :userID");
+        Query query = entityManager.createQuery("SELECT g FROM UserGroup ug INNER JOIN ug.group g WHERE ug.user.id = :userID");
         query.setParameter("userID", userID);
 
         List<UserGroup> userGroups = query.getResultList();
@@ -90,7 +90,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     public List<UserGroup> getAllUserGroupsFromGroup(int groupID) {
         EntityManager entityManager = getEntityManager();
 
-        Query query = entityManager.createQuery("SELECT g.users FROM Group g INNER JOIN g.users WHERE g.id = :groupID");
+        Query query = entityManager.createQuery("SELECT u FROM UserGroup ug INNER JOIN ug.user u WHERE ug.group.id = :groupID");
         query.setParameter("groupID", groupID);
 
         List<UserGroup> userGroups = query.getResultList();
