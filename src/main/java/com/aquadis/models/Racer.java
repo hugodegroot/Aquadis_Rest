@@ -1,6 +1,5 @@
 package com.aquadis.models;
 
-import org.hibernate.annotations.JoinColumnOrFormula;
 
 import javax.persistence.*;
 
@@ -26,7 +25,7 @@ public class Racer {
 
     }
 
-    public Racer(String firstName, String LastName, int salary){
+    public Racer(String firstName, String lastName, int salary){
         setFirstName(firstName);
         setLastName(lastName);
         setSalary(salary);

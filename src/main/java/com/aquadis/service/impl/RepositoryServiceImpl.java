@@ -90,7 +90,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     public List<UserGroup> getAllUserGroupsFromGroup(int groupID) {
         EntityManager entityManager = getEntityManager();
 
-        Query query = entityManager.createQuery("SELECT u FROM UserGroup ug INNER JOIN ug.user u WHERE ug.group.id = :groupID");
+        Query query = entityManager.createQuery("SELECT ug.user FROM UserGroup ug WHERE ug.group.id = :groupID");
         query.setParameter("groupID", groupID);
 
         List<UserGroup> userGroups = query.getResultList();
@@ -130,6 +130,28 @@ public class RepositoryServiceImpl implements RepositoryService {
     @Override
     public Group addGroup(Group group) {
         return (Group) addEntity(group);
+    }
+
+    @Override
+    public List<Racer> getallRacers() {
+        EntityManager entityManager = getEntityManager();
+
+        List<Racer> racers = entityManager.createQuery("SELECT r FROM Racer r").getResultList();
+
+        entityManager.close();
+
+        return racers;
+    }
+
+    @Override
+    public Racer getRacerFromId(int racerID) {
+        EntityManager entityManager = getEntityManager();
+
+        Racer racer = entityManager.find(Racer.class, racerID);
+
+        entityManager.close();
+
+        return racer;
     }
 
     @Override
