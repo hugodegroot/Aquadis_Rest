@@ -83,6 +83,22 @@ public interface RepositoryService {
     Group addGroup(Group group);
 
     // All the method of the racers
+
+    /**
+     * This method return all the user from the database
+     *
+     * @return List of racers
+     */
+    List<Racer> getallRacers();
+
+    /**
+     * this method gets a racer base on its id
+     *
+     * @param racerID
+     * @return racer
+     */
+    Racer getRacerFromId(int racerID);
+
     /**
      * This method adds a racer to the database
      *
