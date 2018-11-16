@@ -3,10 +3,7 @@ package com.aquadis.service.impl;
 import com.aquadis.models.*;
 import com.aquadis.service.RepositoryService;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Map;
 
@@ -167,18 +164,55 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
+    public List<Racer> getTeamsFromId(int teamID) {
+        EntityManager entityManager = getEntityManager();
+
+        List<Racer> teams = entityManager.createQuery("SELECT t FROM Racer r INNER JOIN r.team  t ON r.team.id = t.id").getResultList();
+
+        entityManager.close();
+
+        return teams;
+    }
+
+    @Override
+    public List<Racer> getRacersFromTeam(int teamID) {
+        EntityManager entityManager = getEntityManager();
+
+        Query query = entityManager.createQuery("SELECT r FROM Racer r WHERE r.team.id = :teamID");
+        query.setParameter("teamID",teamID);
+
+        List<Racer> racers = query.getResultList();
+
+        entityManager.close();
+
+        return racers;
+    }
+
+    @Override
     public Racer addRacer(Racer racer) {
         return (Racer) addEntity(racer);
     }
 
     @Override
     public List<Team> getAllTeams() {
-        return null;
+        EntityManager entityManager = getEntityManager();
+
+        List<Team> teams = entityManager.createQuery("SELECT t FROM Team t").getResultList();
+
+        entityManager.close();
+
+        return teams;
     }
 
     @Override
     public Team getTeamFromId(int teamID) {
-        return null;
+        EntityManager entityManager = getEntityManager();
+
+        Team team = entityManager.find(Team.class, teamID);
+
+        entityManager.close();
+
+        return team;
     }
 
     @Override
@@ -216,8 +250,8 @@ public class RepositoryServiceImpl implements RepositoryService {
         addUser(hugo);
 
         // Adds the teams to the database
-        Team mercedis = new Team("Mercedis");
-        addTeam(mercedis);
+        Team mercedes = new Team("Mercedes");
+        addTeam(mercedes);
         Team redbull = new Team("Redbull");
         addTeam(redbull);
         Team scuderiaFerrari = new Team("Scuderia ferrari");
@@ -238,9 +272,9 @@ public class RepositoryServiceImpl implements RepositoryService {
         addTeam(sauber);
 
         // Adds twenty racers to the database
-        Racer hamilton = new Racer("", "Hamilton", 7000000, mercedis);
+        Racer hamilton = new Racer("", "Hamilton", 7000000, mercedes);
         addRacer(hamilton);
-        Racer bottas = new Racer("", "bottas", 6000000, mercedis);
+        Racer bottas = new Racer("", "bottas", 6000000, mercedes);
         addRacer(bottas);
         Racer ricciardo = new Racer("", "ricciardo", 6000000, redbull);
         addRacer(ricciardo);
