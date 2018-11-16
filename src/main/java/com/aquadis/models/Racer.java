@@ -1,6 +1,8 @@
 package com.aquadis.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -21,14 +23,20 @@ public class Racer {
     @Column(name = "salary")
     private int salary;
 
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "team_id")
+    private Team team;
+
     public Racer(){
 
     }
 
-    public Racer(String firstName, String lastName, int salary){
+    public Racer(String firstName, String lastName, int salary, Team team){
         setFirstName(firstName);
         setLastName(lastName);
         setSalary(salary);
+        setTeam(team);
     }
 
     public String getFirstName() {
@@ -53,5 +61,13 @@ public class Racer {
 
     private void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    private void setTeam(Team team) {
+        this.team = team;
     }
 }

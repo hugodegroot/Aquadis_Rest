@@ -1,9 +1,6 @@
 package com.aquadis.service;
 
-import com.aquadis.models.Group;
-import com.aquadis.models.Racer;
-import com.aquadis.models.User;
-import com.aquadis.models.UserGroup;
+import com.aquadis.models.*;
 
 import java.util.List;
 
@@ -31,6 +28,15 @@ public interface RepositoryService {
     User getUserFromId(int userID);
 
     /**
+     * validate user by username and password
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    User getUserFromloginFields(String username, String password);
+
+    /**
      * Adding a user into the database
      *
      * @param user
@@ -39,6 +45,7 @@ public interface RepositoryService {
 
     // All the methods of the usergroups
     /**
+     * get all the groups from a user
      *
      * @param userID
      * @return all usergroups of a user
@@ -46,6 +53,7 @@ public interface RepositoryService {
     List<UserGroup> getAllUserGroupsFromUser(int userID);
 
     /**
+     * get all the users of a group
      *
      * @param groupID
      * @return all usergroups of a group
@@ -53,6 +61,7 @@ public interface RepositoryService {
     List<UserGroup> getAllUserGroupsFromGroup(int groupID);
 
     /**
+     * adding a usergroup to the database
      *
      * @param userGroup
      * @return the added usergroup
@@ -100,9 +109,50 @@ public interface RepositoryService {
     Racer getRacerFromId(int racerID);
 
     /**
+     *  get a specific racer from a team
+     *
+     * @param teamID
+     * @return
+     */
+    List<Racer> getTeamsFromId(int teamID);
+
+    /**
+     * get al the racers from a specific team
+     *
+     * @param teamID
+     * @return
+     */
+    List<Racer> getRacersFromTeam(int teamID);
+
+    /**
      * This method adds a racer to the database
      *
      * @return the added racer
      */
     Racer addRacer(Racer racer);
+
+    // All the methods for the teams
+
+    /**
+     * get all the teams
+     *
+     * @return list of teams
+     */
+    List<Team> getAllTeams();
+
+    /**
+     * get a specific team
+     *
+     * @param teamID
+     * @return specific team
+     */
+    Team getTeamFromId(int teamID);
+
+    /**
+     * adding a team to the database
+     *
+     * @param team
+     * @return added team
+     */
+    Team addTeam(Team team);
 }
