@@ -57,6 +57,27 @@ public class UserResource {
     }
 
     /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    @GET
+    @Path("/user")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUsers(
+            @QueryParam("username") String username,
+            @QueryParam("password") String password){
+
+        User user = service.getUserFromloginFields(username, password);
+
+        System.out.println(user.getPassword());
+        return Response.status(Response.Status.OK)
+                .entity(user).build();
+
+    }
+
+    /**
      * Adds a user to the database
      *
      * @param user specific user
