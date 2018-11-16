@@ -1,9 +1,6 @@
 package com.aquadis.service.impl;
 
-import com.aquadis.models.Group;
-import com.aquadis.models.Racer;
-import com.aquadis.models.User;
-import com.aquadis.models.UserGroup;
+import com.aquadis.models.*;
 import com.aquadis.service.RepositoryService;
 
 import javax.persistence.EntityManager;
@@ -101,6 +98,21 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
+    public User getUserFromloginFields(String username, String password){
+        EntityManager entityManager = getEntityManager();
+
+        Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.userName = :username AND u.password = :password");
+        query.setParameter("username", username);
+        query.setParameter("password", password);
+
+
+        User user = (User)query.getSingleResult();
+
+        entityManager.close();
+        return user;
+    }
+
+    @Override
     public UserGroup addUserGroup(UserGroup userGroup) {
         return (UserGroup) addEntity(userGroup);
     }
@@ -159,6 +171,21 @@ public class RepositoryServiceImpl implements RepositoryService {
         return (Racer) addEntity(racer);
     }
 
+    @Override
+    public List<Team> getAllTeams() {
+        return null;
+    }
+
+    @Override
+    public Team getTeamFromId(int teamID) {
+        return null;
+    }
+
+    @Override
+    public Team addTeam(Team team) {
+        return (Team) addEntity(team);
+    }
+
     /**
      * Adds a object to the database. In our case the object will be a user or a group
      *
@@ -188,46 +215,68 @@ public class RepositoryServiceImpl implements RepositoryService {
         User hugo = new User("hugo123@outlook.nl", "hugo1997", "Hugo", "de Groot", "hugo123", 0);
         addUser(hugo);
 
+        // Adds the teams to the database
+        Team mercedis = new Team("Mercedis");
+        addTeam(mercedis);
+        Team redbull = new Team("Redbull");
+        addTeam(redbull);
+        Team scuderiaFerrari = new Team("Scuderia ferrari");
+        addTeam(scuderiaFerrari);
+        Team forceIndiaF1Team = new Team("Force India F1 Team");
+        addTeam(forceIndiaF1Team);
+        Team renault = new Team("Renault");
+        addTeam(renault);
+        Team mcLaren = new Team("McLaren");
+        addTeam(mcLaren);
+        Team williams = new Team("Williams");
+        addTeam(williams);
+        Team scuderiaToroRosso = new Team("Scuderia Toro Rosso");
+        addTeam(scuderiaToroRosso);
+        Team haasF1Team = new Team("Haas F1 Team");
+        addTeam(haasF1Team);
+        Team sauber = new Team("Sauber");
+        addTeam(sauber);
+
         // Adds twenty racers to the database
-        Racer hamilton = new Racer("", "Hamilton", 7000000);
+        Racer hamilton = new Racer("", "Hamilton", 7000000, mercedis);
         addRacer(hamilton);
-        Racer bottas = new Racer("", "bottas", 6000000);
+        Racer bottas = new Racer("", "bottas", 6000000, mercedis);
         addRacer(bottas);
-        Racer ricciardo = new Racer("", "ricciardo", 6000000);
+        Racer ricciardo = new Racer("", "ricciardo", 6000000, redbull);
         addRacer(ricciardo);
-        Racer verstappen = new Racer("", "verstappen", 6000000);
+        Racer verstappen = new Racer("", "verstappen", 6000000, redbull);
         addRacer(verstappen);
-        Racer vettel = new Racer("", "vettel", 7000000);
+        Racer vettel = new Racer("", "vettel", 7000000, scuderiaFerrari);
         addRacer(vettel);
-        Racer raikkonen = new Racer("", "raikkonen", 6000000);
+        Racer raikkonen = new Racer("", "raikkonen", 6000000, scuderiaFerrari);
         addRacer(raikkonen);
-        Racer perez = new Racer("", "perez", 3000000);
+        Racer perez = new Racer("", "perez", 3000000, forceIndiaF1Team);
         addRacer(perez);
-        Racer ocon = new Racer("", "ocon", 3000000);
+        Racer ocon = new Racer("", "ocon", 3000000, forceIndiaF1Team);
         addRacer(ocon);
-        Racer huikenberg = new Racer("", "huikenberg", 4000000);
-        addRacer(huikenberg);
-        Racer sainz = new Racer("", "sainz", 3000000);
+        Racer hulkenberg = new Racer("", "hülkenberg", 4000000, renault);
+        addRacer(hulkenberg);
+        Racer sainz = new Racer("", "sainz", 3000000, renault);
         addRacer(sainz);
-        Racer vandoorne = new Racer("", "vandoorne", 3000000);
+        Racer vandoorne = new Racer("", "vandoorne", 3000000, mcLaren);
         addRacer(vandoorne);
-        Racer alonzo = new Racer("", "alonzo", 4000000);
+        Racer alonzo = new Racer("", "alonzo", 4000000, mcLaren);
         addRacer(alonzo);
-        Racer stroll = new Racer("", "stroll", 2000000);
+        Racer stroll = new Racer("", "stroll", 2000000, williams);
         addRacer(stroll);
-        Racer sirotkin = new Racer("", "Sirotkin", 1000000);
+        Racer sirotkin = new Racer("", "Sirotkin", 1000000, williams);
         addRacer(sirotkin);
-        Racer gasly = new Racer("", "Gasly", 2000000);
+        Racer gasly = new Racer("", "Gasly", 2000000, scuderiaToroRosso);
         addRacer(gasly);
-        Racer hartley = new Racer("", "Hartley", 2000000);
+        Racer hartley = new Racer("", "Hartley", 2000000, scuderiaToroRosso);
         addRacer(hartley);
-        Racer grosjean = new Racer("", "Grosjean", 2000000);
+        Racer grosjean = new Racer("", "Grosjean", 2000000, haasF1Team);
         addRacer(grosjean);
-        Racer magnussen = new Racer("", "Magnussen", 3000000);
+        Racer magnussen = new Racer("", "Magnussen", 3000000, haasF1Team);
         addRacer(magnussen);
-        Racer ericsson = new Racer("", "Ericsson", 1000000);
+        Racer ericsson = new Racer("", "Ericsson", 1000000, sauber);
         addRacer(ericsson);
-        Racer leclerc = new Racer("", "Leclerc", 1000000);
+        Racer leclerc = new Racer("", "Leclerc", 1000000, sauber);
         addRacer(leclerc);
 
         // Adds three groups to the database

@@ -1,9 +1,6 @@
 package com.aquadis.service;
 
-import com.aquadis.models.Group;
-import com.aquadis.models.Racer;
-import com.aquadis.models.User;
-import com.aquadis.models.UserGroup;
+import com.aquadis.models.*;
 
 import java.util.List;
 
@@ -29,6 +26,14 @@ public interface RepositoryService {
      * @return a user
      */
     User getUserFromId(int userID);
+
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    User getUserFromloginFields(String username, String password);
 
     /**
      * Adding a user into the database
@@ -105,4 +110,26 @@ public interface RepositoryService {
      * @return the added racer
      */
     Racer addRacer(Racer racer);
+
+    // All the methods for the teams
+
+    /**
+     *
+     * @return list of teams
+     */
+    List<Team> getAllTeams();
+
+    /**
+     *
+     * @param teamID
+     * @return specific team
+     */
+    Team getTeamFromId(int teamID);
+
+    /**
+     *
+     * @param team
+     * @return added team
+     */
+    Team addTeam(Team team);
 }
