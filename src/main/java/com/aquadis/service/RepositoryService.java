@@ -44,6 +44,9 @@ public interface RepositoryService {
     User addUser(User user);
 
     // All the methods of the usergroups
+
+    List<UserGroup> getAllUserGroups(int ID);
+
     /**
      * get all the groups from a user
      *

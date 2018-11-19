@@ -67,6 +67,20 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
+    public List<UserGroup> getAllUserGroups(int ID){
+        EntityManager entityManager = getEntityManager();
+
+        Query query = entityManager.createQuery("SELECT ug FROM UserGroup ug WHERE ug.user.id = :ID");
+        query.setParameter("ID", ID);
+
+        List<UserGroup> userGroups = query.getResultList();
+
+        entityManager.close();
+
+        return userGroups;
+    }
+
+    @Override
     public List<UserGroup> getAllUserGroupsFromUser(int userID) {
         EntityManager entityManager = getEntityManager();
 

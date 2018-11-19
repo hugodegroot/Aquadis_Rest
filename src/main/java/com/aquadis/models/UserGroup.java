@@ -19,6 +19,9 @@ public class UserGroup {
     @Column(name = "role")
     private String role;
 
+    @Column(name = "budget", columnDefinition = "int default 20000000")
+    private int budget;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "user_id")
@@ -33,11 +36,12 @@ public class UserGroup {
     public UserGroup() {
     }
 
-    public UserGroup(int points, String role, User user, Group group){
+    public UserGroup(int points, String role, User user, Group group) {
         setPoints(points);
         setRole(role);
         setUser(user);
         setGroup(group);
+        setBudget(20000000);
     }
 
     public int getId() {
@@ -62,6 +66,14 @@ public class UserGroup {
 
     private void setRole(String role) {
         this.role = role;
+    }
+
+    public int getBudget() {
+        return budget;
+    }
+
+    private void setBudget(int budget) {
+        this.budget = budget;
     }
 
     public User getUser() {
