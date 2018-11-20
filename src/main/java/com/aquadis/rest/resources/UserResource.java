@@ -58,7 +58,7 @@ public class UserResource {
 
     /**
      *
-     * @param username
+     * @param email
      * @param password
      * @return
      */
@@ -66,10 +66,10 @@ public class UserResource {
     @Path("/user")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUsers(
-            @QueryParam("username") String username,
+            @QueryParam("email") String email,
             @QueryParam("password") String password){
 
-        User user = service.getUserFromloginFields(username, password);
+        User user = service.getUserFromloginFields(email, password);
 
         System.out.println(user.getPassword());
         return Response.status(Response.Status.OK)

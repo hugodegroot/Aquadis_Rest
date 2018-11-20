@@ -109,11 +109,11 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
-    public User getUserFromloginFields(String username, String password){
+    public User getUserFromloginFields(String email, String password){
         EntityManager entityManager = getEntityManager();
 
-        Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.userName = :username AND u.password = :password");
-        query.setParameter("username", username);
+        Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = :email AND u.password = :password");
+        query.setParameter("email", email);
         query.setParameter("password", password);
 
 

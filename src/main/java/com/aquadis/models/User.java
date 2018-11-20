@@ -18,9 +18,6 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "username")
-    private String userName;
-
     @Column(name = "firstname")
     private String firstName;
 
@@ -41,7 +38,6 @@ public class User {
 
     public User(String email, String userName, String firstName, String lastName, String password, int isAdmin) {
         setEmail(email);
-        setUserName(userName);
         setFirstName(firstName);
         setLastName(lastName);
         setPassword(password);
@@ -54,14 +50,6 @@ public class User {
 
     private void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    private void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getFirstName() {
