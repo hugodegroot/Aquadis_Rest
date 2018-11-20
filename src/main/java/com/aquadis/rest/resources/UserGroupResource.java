@@ -24,6 +24,13 @@ public class UserGroupResource {
     }
 
     @GET
+    @Path("/{ID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<UserGroup> getAllUserGroups(@PathParam("ID") int ID){
+        return service.getAllUserGroups(ID);
+    }
+
+    @GET
     @Path("/groups")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getGroupsFromUser(@PathParam("userID") int userID){
