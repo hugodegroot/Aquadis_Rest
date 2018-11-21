@@ -158,4 +158,32 @@ public interface RepositoryService {
      * @return added team
      */
     Team addTeam(Team team);
+
+    // All the methods for the races
+
+    /**
+     *
+     * @return
+     */
+    List<Race> getAllRaces();
+
+    /**
+     *
+     * @param raceID
+     * @return
+     */
+    Race getRaceFromId(int raceID);
+
+    /**
+     *
+     * @param raceID
+     * @return
+     */
+    List<RacePosition> getRacePositionsFromRace(int raceID);
+
+    Race addRace(Race race);
+
+    RacePosition addRacePosition(RacePosition racePosition);
+
+    Position addPosition(Position position);
 }
