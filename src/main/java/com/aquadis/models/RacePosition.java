@@ -1,12 +1,13 @@
 package com.aquadis.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.JoinColumnOrFormula;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Grid_Positition")
-public class GridPosition {
+public class RacePosition {
 
     @Id
     @Column(name = "id")
@@ -32,19 +33,37 @@ public class GridPosition {
     @JoinColumn(name = "racer_id")
     private Racer racer;
 
-    @Column(name = "lap_time")
+    @Column(name = "match_time")
     private String time;
 
-    public GridPosition() {
+    @Column(name = "lap_time")
+    private String beginTime;
+
+    @Column(name = "extra_laps")
+    private int laps;
+
+    @Column(name = "status")
+    private String Status;
+
+    public RacePosition() {
     }
 
-    public GridPosition(Race race, Position beginPosition, Position endPosition, Racer racer, int minutes, int seconds, int milliseconds) {
+    public RacePosition(Race race, Racer racer, Position beginPosition, int bMinutes, int bSeconds, int bMilliseconds,
+                        Position endPosition, int hours, int minutes, int seconds, int milliseconds, int laps, String status) {
         setRacer(racer);
         setRace(race);
         setBeginPosition(beginPosition);
         setEndPosition(endPosition);
-        LapTime lapTime = new LapTime(minutes, seconds, milliseconds);
+
+        // Sets the laptimes
+        LapTime lapTime = new LapTime();
+        lapTime.setTime(bMinutes, bSeconds, bMilliseconds);
+        setBeginTime(lapTime.getTime());
+        lapTime.setTime(hours, minutes, seconds, milliseconds);
         setTime(lapTime.getTime());
+
+        setLaps(laps);
+        setStatus(status);
     }
 
     public Race getRace() {
@@ -85,5 +104,29 @@ public class GridPosition {
 
     private void setTime(String time) {
         this.time = time;
+    }
+
+    public String getBeginTime() {
+        return beginTime;
+    }
+
+    private void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public int getLaps() {
+        return laps;
+    }
+
+    private void setLaps(int laps) {
+        this.laps = laps;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    private void setStatus(String status) {
+        Status = status;
     }
 }
