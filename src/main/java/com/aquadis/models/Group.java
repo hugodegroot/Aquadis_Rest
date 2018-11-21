@@ -22,7 +22,6 @@ public class Group {
     private List<UserGroup> users;
 
     public Group() {
-
     }
 
     public Group(String name) {
