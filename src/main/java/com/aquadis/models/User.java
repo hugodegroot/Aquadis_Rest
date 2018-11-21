@@ -30,13 +30,13 @@ public class User {
     @Column(name = "is_admin")
     private int isAdmin = 0;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserGroup> groups;
 
     public User() {
     }
 
-    public User(String email, String userName, String firstName, String lastName, String password, int isAdmin) {
+    public User(String email, String firstName, String lastName, String password, int isAdmin) {
         setEmail(email);
         setFirstName(firstName);
         setLastName(lastName);

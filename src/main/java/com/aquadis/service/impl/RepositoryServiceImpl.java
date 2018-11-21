@@ -20,7 +20,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     // An instance of the service is created and during class initialisation
     static {
         instance = new RepositoryServiceImpl();
-        //instance.loadExamples();
+//        instance.loadExamples();
     }
 
     //  Method to get a reference to the instance (singleton)
@@ -67,7 +67,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
-    public List<UserGroup> getAllUserGroups(int ID){
+    public List<UserGroup> getAllUserGroups(int ID) {
         EntityManager entityManager = getEntityManager();
 
         Query query = entityManager.createQuery("SELECT ug FROM UserGroup ug WHERE ug.user.id = :ID");
@@ -109,7 +109,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
-    public User getUserFromloginFields(String email, String password){
+    public User getUserFromloginFields(String email, String password) {
         EntityManager entityManager = getEntityManager();
 
         Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = :email AND u.password = :password");
@@ -117,7 +117,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         query.setParameter("password", password);
 
 
-        User user = (User)query.getSingleResult();
+        User user = (User) query.getSingleResult();
 
         entityManager.close();
         return user;
@@ -193,7 +193,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         EntityManager entityManager = getEntityManager();
 
         Query query = entityManager.createQuery("SELECT r FROM Racer r WHERE r.team.id = :teamID");
-        query.setParameter("teamID",teamID);
+        query.setParameter("teamID", teamID);
 
         List<Racer> racers = query.getResultList();
 
@@ -234,6 +234,57 @@ public class RepositoryServiceImpl implements RepositoryService {
         return (Team) addEntity(team);
     }
 
+    @Override
+    public List<Race> getAllRaces() {
+        EntityManager entityManager = getEntityManager();
+
+        List<Race> races = entityManager.createQuery("SELECT r FROM Race r").getResultList();
+
+        entityManager.close();
+
+        return races;
+    }
+
+    @Override
+    public Race getRaceFromId(int raceID) {
+        EntityManager entityManager = getEntityManager();
+
+        Race race = entityManager.find(Race.class, raceID);
+
+        entityManager.close();
+
+        return race;
+    }
+
+    @Override
+    public List<RacePosition> getRacePositionsFromRace(int raceID) {
+        EntityManager entityManager = getEntityManager();
+
+        Query query = entityManager.createQuery("SELECT rp FROM RacePosition rp WHERE rp.race.id = :raceID");
+        query.setParameter("raceID", raceID);
+
+        List<RacePosition> racePositions = query.getResultList();
+
+        entityManager.close();
+
+        return racePositions;
+    }
+
+    @Override
+    public Race addRace(Race race) {
+        return (Race) addEntity(race);
+    }
+
+    @Override
+    public RacePosition addRacePosition(RacePosition racePosition) {
+        return (RacePosition) addEntity(racePosition);
+    }
+
+    @Override
+    public Position addPosition(Position position) {
+        return (Position) addEntity(position);
+    }
+
     /**
      * Adds a object to the database. In our case the object will be a user or a group
      *
@@ -253,14 +304,19 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     private void loadExamples() {
+        String nothing = "";
+        String dnf = "DNF";
+        String dq = "DQ";
+
+
         // Adds four users to the database
-        User luuk = new User("luuk123@hotmail.nl", "luuk", "Luuk", "Goedhart", "luuk123", 1);
+        User luuk = new User("luuk123@hotmail.nl", "Luuk", "Goedhart", "luuk123", 1);
         addUser(luuk);
-        User lorenzo = new User("lkorn.9520@gmail.com", "ALLIGAT0R_BL00D", "Lorenzo", "Korn", "lorenzo123", 1);
+        User lorenzo = new User("lkorn.9520@gmail.com", "Lorenzo", "Korn", "lorenzo123", 1);
         addUser(lorenzo);
-        User janWillem = new User("jwvbremen@hotmail.nl", "PhyrexAlianza", "JW", "van Bremen", "jw123", 0);
+        User janWillem = new User("jwvbremen@hotmail.nl", "JW", "van Bremen", "jw123", 0);
         addUser(janWillem);
-        User hugo = new User("hugo123@outlook.nl", "hugo1997", "Hugo", "de Groot", "hugo123", 0);
+        User hugo = new User("hugo123@outlook.nl", "Hugo", "de Groot", "hugo123", 0);
         addUser(hugo);
 
         // Adds the teams to the database
@@ -356,5 +412,101 @@ public class RepositoryServiceImpl implements RepositoryService {
         addUserGroup(usergroup9);
         UserGroup usergroup10 = new UserGroup(0, "member", hugo, group3);
         addUserGroup(usergroup10);
+
+        // TODO: Adds races
+        Race usa = new Race("FORMULA 1 PIRELLI 2018 UNITED STATES GRAND PRIX", "October", 19, 21);
+        addRace(usa);
+        Race mexico = new Race("FORMULA 1 GRAN PREMIO DE MÉXICO 2018", "October", 26, 28);
+        addRace(mexico);
+        Race brazil = new Race("FORMULA 1 GRANDE PRÊMIO HEINEKEN DO BRASIL 2018", "November", 9, 11);
+        addRace(brazil);
+        Race abuDhabi = new Race("FORMULA 1 2018 ETIHAD AIRWAYS ABU DHABI GRAND PRIX", "November", 23, 25);
+        addRace(abuDhabi);
+
+        // TODO: Adds positions
+        Position first = new Position("First");
+        addPosition(first);
+        Position second = new Position("Second");
+        addPosition(second);
+        Position third = new Position("Third");
+        addPosition(third);
+        Position fourth = new Position("fourth");
+        addPosition(fourth);
+        Position fifth = new Position("fifth");
+        addPosition(fifth);
+        Position sixth = new Position("Sixth");
+        addPosition(sixth);
+        Position seventh = new Position("Seventh");
+        addPosition(seventh);
+        Position eighth = new Position("Eighth");
+        addPosition(eighth);
+        Position ninth = new Position("Ninth");
+        addPosition(ninth);
+        Position tenth = new Position("Tenth");
+        addPosition(tenth);
+        Position eleventh = new Position("Eleventh");
+        addPosition(eleventh);
+        Position twelfth = new Position("Twelfth");
+        addPosition(twelfth);
+        Position thirteenth = new Position("Thirteenth");
+        addPosition(thirteenth);
+        Position fourteenth = new Position("Fourteenth");
+        addPosition(fourteenth);
+        Position fifteenth = new Position("Fifteenth");
+        addPosition(fifteenth);
+        Position sixteenth = new Position("Sixteenth");
+        addPosition(sixteenth);
+        Position seventeenth = new Position("Seventeenth");
+        addPosition(seventeenth);
+        Position eighteenth = new Position("Eighteenth");
+        addPosition(eighteenth);
+        Position nineteenth = new Position("Nineteenth");
+        addPosition(nineteenth);
+        Position twentieth = new Position("Twentieth");
+        addPosition(twentieth);
+        Position none = new Position("");
+        addPosition(none);
+
+        // TODO: Adds racepositions
+        RacePosition usaP1 = new RacePosition(usa, raikkonen, second, 1, 32, 237, first, 1, 34, 18, 643, 0, nothing);
+        addRacePosition(usaP1);
+        RacePosition usaP2 = new RacePosition(usa, verstappen, eighteenth, 1, 34, 766, second, 1, 34, 19, 924, 0, nothing);
+        addRacePosition(usaP2);
+        RacePosition usaP3 = new RacePosition(usa, hamilton, first, 1, 32, 237, third, 1, 34, 20, 985, 0, nothing);
+        addRacePosition(usaP3);
+        RacePosition usaP4 = new RacePosition(usa, vettel, fifth, 1, 32, 298, fourth, 1, 34, 36, 865, 0, nothing);
+        addRacePosition(usaP4);
+        RacePosition usaP5 = new RacePosition(usa, bottas, third, 1, 32, 616, fifth, 1, 34, 43, 387, 0, nothing);
+        addRacePosition(usaP5);
+        RacePosition usaP6 = new RacePosition(usa, hulkenberg, seventh, 1, 34, 215, sixth, 1, 35, 45, 853, 0, nothing);
+        addRacePosition(usaP6);
+        RacePosition usaP7 = new RacePosition(usa, sainz, eleventh, 1, 34, 566, seventh, 1, 35, 53, 637, 0, nothing);
+        addRacePosition(usaP7);
+        RacePosition usaP8 = new RacePosition(usa, perez, tenth, 1, 32, 594, eighth, 1, 35, 59, 723, 0, nothing);
+        addRacePosition(usaP8);
+        RacePosition usaP9 = new RacePosition(usa, hartley, twentieth, 0, 0, 0, ninth, 1, 34, 49, 995, 1, nothing);
+        addRacePosition(usaP9);
+        RacePosition usaP10 = new RacePosition(usa, ericsson, sixteenth, 1, 35, 536, tenth, 1, 34, 51, 284, 1, nothing);
+        addRacePosition(usaP10);
+        RacePosition usaP11 = new RacePosition(usa, vandoorne, seventeenth, 1, 35, 736, eleventh, 1, 34, 52, 667, 1, nothing);
+        addRacePosition(usaP11);
+        RacePosition usaP12 = new RacePosition(usa, gasly, nineteenth, 0, 0, 0, twelfth, 1, 35, 15, 821, 1, nothing);
+        addRacePosition(usaP12);
+        RacePosition usaP13 = new RacePosition(usa, sirotkin, fourteenth, 1, 35, 362, thirteenth, 1, 35, 28, 139, 1, nothing);
+        addRacePosition(usaP13);
+        RacePosition usaP14 = new RacePosition(usa, stroll, fifteenth, 1, 35, 480, fourteenth, 1, 34, 40, 494, 2, nothing);
+        addRacePosition(usaP14);
+        RacePosition usaP15 = new RacePosition(usa, leclerc, ninth, 1, 34, 420, none, 0, 34, 18, 643, 25, dnf);
+        addRacePosition(usaP15);
+        RacePosition usaP16 = new RacePosition(usa, ricciardo, fourth, 1, 33, 494, none, 0, 13, 32, 870, 48, dnf);
+        addRacePosition(usaP16);
+        RacePosition usaP17 = new RacePosition(usa, grosjean, eighth, 1, 34, 250, none, 0, 4, 39, 025, 54, dnf);
+        addRacePosition(usaP17);
+        RacePosition usaP18 = new RacePosition(usa, alonzo, thirteenth, 1, 35, 394, none, 0, 2, 13, 811, 55, dnf);
+        addRacePosition(usaP18);
+        RacePosition usaP19 = new RacePosition(usa, ocon, sixth, 1, 34, 145, none, 1, 35, 57, 931, 0, dq);
+        addRacePosition(usaP19);
+        RacePosition usaP20 = new RacePosition(usa, magnussen, twelfth, 1, 34, 732, none, 1, 35, 59, 300, 0, dq);
+        addRacePosition(usaP20);
     }
 }

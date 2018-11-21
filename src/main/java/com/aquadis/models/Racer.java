@@ -39,6 +39,10 @@ public class Racer {
         setTeam(team);
     }
 
+    public int getId(){
+        return id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
