@@ -7,8 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="aquadis" />
-        <module name="aquadis-app" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="aquadis" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
