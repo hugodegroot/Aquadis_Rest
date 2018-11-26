@@ -314,7 +314,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         addUser(luuk);
         User lorenzo = new User("lkorn.9520@gmail.com", "Lorenzo", "Korn", "lorenzo123", 1);
         addUser(lorenzo);
-        User janWillem = new User("jwvbremen@hotmail.nl", "JW", "van Bremen", "jw123", 0);
+        User janWillem = new User("jwvbremen@hotmail.nl", "Jan-Willem", "van Bremen", "jw123", 0);
         addUser(janWillem);
         User hugo = new User("hugo123@outlook.nl", "Hugo", "de Groot", "hugo123", 0);
         addUser(hugo);
