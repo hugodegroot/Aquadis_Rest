@@ -163,7 +163,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
-    public List<Racer> getallRacers() {
+    public List<Racer> getAllRacers() {
         EntityManager entityManager = getEntityManager();
 
         List<Racer> racers = entityManager.createQuery("SELECT r FROM Racer r").getResultList();
@@ -207,6 +207,21 @@ public class RepositoryServiceImpl implements RepositoryService {
         entityManager.close();
 
         return racers;
+    }
+
+    @Override
+    public Racer updateRacerSalary(int racerID, int salary) {
+        EntityManager entityManager = getEntityManager();
+
+        Racer racer = entityManager.find(Racer.class, racerID);
+
+        entityManager.getTransaction().begin();
+        racer.setSalary(salary);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
+        return racer;
     }
 
     @Override
@@ -256,7 +271,6 @@ public class RepositoryServiceImpl implements RepositoryService {
     public Race getCurrentRace() {
         LocalDate localDate = LocalDate.now();
         Date date = new Date(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
-        System.out.printf("%20d%20d%20d", localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
 
         EntityManager entityManager = getEntityManager();
 
