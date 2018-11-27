@@ -166,7 +166,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     public List<Racer> getAllRacers() {
         EntityManager entityManager = getEntityManager();
 
-        List<Racer> racers = entityManager.createQuery("SELECT r FROM Racer r").getResultList();
+        List<Racer> racers = entityManager.createQuery("SELECT r FROM Racer r ORDER BY r.salary DESC").getResultList();
 
         entityManager.close();
 
@@ -233,7 +233,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     public List<Team> getAllTeams() {
         EntityManager entityManager = getEntityManager();
 
-        List<Team> teams = entityManager.createQuery("SELECT t FROM Team t").getResultList();
+        List<Team> teams = entityManager.createQuery("SELECT t FROM Team t ORDER BY t.name").getResultList();
 
         entityManager.close();
 
@@ -258,9 +258,16 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public List<Race> getAllRaces() {
+        LocalDate localDate = LocalDate.now();
+        Date date = new Date(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
+
         EntityManager entityManager = getEntityManager();
 
-        List<Race> races = entityManager.createQuery("SELECT r FROM Race r ORDER BY r.id DESC").getResultList();
+        Query query = entityManager.createQuery("SELECT r FROM Race r where r.endDate > :currentDate ORDER BY r.id");
+        query.setParameter("currentDate", date, TemporalType.DATE);
+
+        List<Race> races = query.getResultList();
+        races.remove(0);
 
         entityManager.close();
 
@@ -274,8 +281,8 @@ public class RepositoryServiceImpl implements RepositoryService {
 
         EntityManager entityManager = getEntityManager();
 
-        Query query = entityManager.createQuery("SELECT r FROM Race r WHERE r.startDate >= :beginDate");
-        query.setParameter("beginDate", date, TemporalType.DATE);
+        Query query = entityManager.createQuery("SELECT r FROM Race r WHERE r.startDate >= :currentDate");
+        query.setParameter("currentDate", date, TemporalType.DATE);
 
         Race race = (Race) query.getResultList().get(0);
 
@@ -381,45 +388,45 @@ public class RepositoryServiceImpl implements RepositoryService {
         addTeam(sauber);
 
         // Adds twenty racers to the database
-        Racer hamilton = new Racer("", "Hamilton", 7000000, mercedes);
+        Racer hamilton = new Racer( "Lewis", "Hamilton", 7000000, mercedes);
         addRacer(hamilton);
-        Racer bottas = new Racer("", "bottas", 6000000, mercedes);
+        Racer bottas = new Racer(   "Valtteri", "bottas", 6000000, mercedes);
         addRacer(bottas);
-        Racer ricciardo = new Racer("", "ricciardo", 6000000, redbull);
+        Racer ricciardo = new Racer("Daniel", "ricciardo", 6000000, redbull);
         addRacer(ricciardo);
-        Racer verstappen = new Racer("", "verstappen", 6000000, redbull);
+        Racer verstappen =new Racer("Max", "verstappen", 6000000, redbull);
         addRacer(verstappen);
-        Racer vettel = new Racer("", "vettel", 7000000, scuderiaFerrari);
+        Racer vettel = new Racer(   "Sebastian", "vettel", 7000000, scuderiaFerrari);
         addRacer(vettel);
-        Racer raikkonen = new Racer("", "raikkonen", 6000000, scuderiaFerrari);
+        Racer raikkonen = new Racer("Kimi", "raikkonen", 6000000, scuderiaFerrari);
         addRacer(raikkonen);
-        Racer perez = new Racer("", "perez", 3000000, forceIndiaF1Team);
+        Racer perez = new Racer(    "Kenneth", "perez", 3000000, forceIndiaF1Team);
         addRacer(perez);
-        Racer ocon = new Racer("", "ocon", 3000000, forceIndiaF1Team);
+        Racer ocon = new Racer(     "Esteban", "ocon", 3000000, forceIndiaF1Team);
         addRacer(ocon);
-        Racer hulkenberg = new Racer("", "hülkenberg", 4000000, renault);
+        Racer hulkenberg = new Racer("Nico", "hülkenberg", 4000000, renault);
         addRacer(hulkenberg);
-        Racer sainz = new Racer("", "sainz", 3000000, renault);
+        Racer sainz = new Racer(    "Carlos", "sainz", 3000000, renault);
         addRacer(sainz);
-        Racer vandoorne = new Racer("", "vandoorne", 3000000, mcLaren);
+        Racer vandoorne = new Racer("Stoffel", "vandoorne", 3000000, mcLaren);
         addRacer(vandoorne);
-        Racer alonzo = new Racer("", "alonzo", 4000000, mcLaren);
+        Racer alonzo = new Racer(   "Fernando", "alonzo", 4000000, mcLaren);
         addRacer(alonzo);
-        Racer stroll = new Racer("", "stroll", 2000000, williams);
+        Racer stroll = new Racer(   "Lance", "stroll", 2000000, williams);
         addRacer(stroll);
-        Racer sirotkin = new Racer("", "Sirotkin", 1000000, williams);
+        Racer sirotkin = new Racer( "Sergej", "Sirotkin", 1000000, williams);
         addRacer(sirotkin);
-        Racer gasly = new Racer("", "Gasly", 2000000, scuderiaToroRosso);
+        Racer gasly = new Racer(    "Pierre", "Gasly", 2000000, scuderiaToroRosso);
         addRacer(gasly);
-        Racer hartley = new Racer("", "Hartley", 2000000, scuderiaToroRosso);
+        Racer hartley = new Racer(  "Brandon", "Hartley", 2000000, scuderiaToroRosso);
         addRacer(hartley);
-        Racer grosjean = new Racer("", "Grosjean", 2000000, haasF1Team);
+        Racer grosjean = new Racer( "Romain", "Grosjean", 2000000, haasF1Team);
         addRacer(grosjean);
-        Racer magnussen = new Racer("", "Magnussen", 3000000, haasF1Team);
+        Racer magnussen = new Racer("Kevin", "Magnussen", 3000000, haasF1Team);
         addRacer(magnussen);
-        Racer ericsson = new Racer("", "Ericsson", 1000000, sauber);
+        Racer ericsson = new Racer( "Marcus", "Ericsson", 1000000, sauber);
         addRacer(ericsson);
-        Racer leclerc = new Racer("", "Leclerc", 1000000, sauber);
+        Racer leclerc = new Racer(  "Charles", "Leclerc", 1000000, sauber);
         addRacer(leclerc);
 
         // Adds three groups to the database
@@ -461,8 +468,12 @@ public class RepositoryServiceImpl implements RepositoryService {
         addRace(brazil);
         Race abuDhabi = new Race("FORMULA 1 2018 ETIHAD AIRWAYS ABU DHABI GRAND PRIX","Abu Dhabi",  new Date(2018, 10, 23), new Date(2018, 10, 25));
         addRace(abuDhabi);
-        Race australia = new Race("FORMULA 1 2018 Australia Melbourne GRAND PRIX","Melbourne",  new Date(2019, 2, 17), new Date(2019, 2, 19));
+        Race australia = new Race("FORMULA 1 2019 Australia Melbourne GRAND PRIX","Melbourne",  new Date(2019, 2, 17), new Date(2019, 2, 19));
         addRace(australia);
+        Race bahrain = new Race("FORMULA 1 2019 Bahrain Sakhir GRAND PRIX","Sakhir",  new Date(2019, 2, 31), new Date(2019, 3, 2));
+        addRace(bahrain);
+        Race china = new Race("FORMULA 1 2019 China Shanghai GRAND PRIX","Shanghai",  new Date(2019, 3, 14), new Date(2019, 3, 16));
+        addRace(china);
 
         // TODO: Adds positions
         Position first = new Position("First");

@@ -30,7 +30,7 @@ public class RacerResource {
     @PUT
     @Path("/racer")
     @Produces(MediaType.APPLICATION_JSON)
-    public Racer updateSalary(@QueryParam("racer") int racerID, @QueryParam("salary") int salary) {
+    public Racer updateSalary(@QueryParam("id") int racerID, @QueryParam("salary") int salary) {
         return service.updateRacerSalary(racerID, salary);
     }
 
