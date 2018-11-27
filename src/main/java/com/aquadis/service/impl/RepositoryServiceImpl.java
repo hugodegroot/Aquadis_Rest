@@ -255,21 +255,15 @@ public class RepositoryServiceImpl implements RepositoryService {
     @Override
     public Race getCurrentRace() {
         LocalDate localDate = LocalDate.now();
-        System.out.println("localDate.getDayOfMonth() = " + localDate.getDayOfMonth());
-
-        String monthValue = localDate.getMonth().toString();
-        String month = monthValue.substring(0, 1) + monthValue.substring(1).toLowerCase();
-        System.out.println("month = " + month);
+        Date date = new Date(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
+        System.out.printf("%20d%20d%20d", localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
 
         EntityManager entityManager = getEntityManager();
 
-        Query query = entityManager.createQuery("SELECT r FROM Race r WHERE r.startDay > :localDate AND r.month = :month AND r.year >= :year");
-        query.setParameter("localDate", localDate.getDayOfMonth());
-        query.setParameter("month", month);
-        query.setParameter("year", localDate.getYear());
+        Query query = entityManager.createQuery("SELECT r FROM Race r WHERE r.startDate > :localDate");
+        query.setParameter("localDate", date, TemporalType.DATE);
 
-
-        Race race = (Race) query.getSingleResult();
+        Race race = (Race) query.getResultList().get(0);
 
         entityManager.close();
 
