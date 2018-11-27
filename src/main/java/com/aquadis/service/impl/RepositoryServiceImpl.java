@@ -260,8 +260,8 @@ public class RepositoryServiceImpl implements RepositoryService {
 
         EntityManager entityManager = getEntityManager();
 
-        Query query = entityManager.createQuery("SELECT r FROM Race r WHERE r.startDate > :localDate");
-        query.setParameter("localDate", date, TemporalType.DATE);
+        Query query = entityManager.createQuery("SELECT r FROM Race r WHERE r.startDate >= :beginDate");
+        query.setParameter("beginDate", date, TemporalType.DATE);
 
         Race race = (Race) query.getResultList().get(0);
 
