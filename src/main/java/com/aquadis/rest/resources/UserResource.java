@@ -71,7 +71,11 @@ public class UserResource {
 
         User user = service.getUserFromloginFields(email, password);
 
-        System.out.println(user.getPassword());
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ClientError("Cannot find user with email: " + email + "and password: " + password)).build();
+        }
+
         return Response.status(Response.Status.OK)
                 .entity(user).build();
 

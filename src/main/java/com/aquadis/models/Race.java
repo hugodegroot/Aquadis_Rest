@@ -1,6 +1,7 @@
 package com.aquadis.models;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -15,14 +16,16 @@ public class Race {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "month")
-    private String month;
+    @Column(name = "location")
+    private String location;
 
     @Column(name = "start_day")
-    private int startDay;
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
 
     @Column(name = "end_day")
-    private int endDay;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
 
     @OneToMany(mappedBy = "race", fetch = FetchType.EAGER)
     private List<RacePosition> positions;
@@ -30,11 +33,19 @@ public class Race {
     public Race() {
     }
 
-    public Race(String name, String month, int start, int end) {
+    public Race(String name, String location, Date start, Date end) {
         setName(name);
-        setMonth(month);
-        setStartDay(start);
-        setEndDay(end);
+        setLocation(location);
+        setStartDate(start);
+        setEndDate(end);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -45,28 +56,28 @@ public class Race {
         this.name = name;
     }
 
-    public String getMonth() {
-        return month;
+    public String getLocation() {
+        return location;
     }
 
-    private void setMonth(String month) {
-        this.month = month;
+    private void setLocation(String location) {
+        this.location = location;
     }
 
-    public int getStartDay() {
-        return startDay;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    private void setStartDay(int startDay) {
-        this.startDay = startDay;
+    private void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public int getEndDay() {
-        return endDay;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    private void setEndDay(int endDay) {
-        this.endDay = endDay;
+    private void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public List<RacePosition> getPositions() {
