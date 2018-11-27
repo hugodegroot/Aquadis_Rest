@@ -4,6 +4,8 @@ import com.aquadis.models.*;
 import com.aquadis.service.RepositoryService;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +22,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     // An instance of the service is created and during class initialisation
     static {
         instance = new RepositoryServiceImpl();
-//        instance.loadExamples();
+        instance.loadExamples();
     }
 
     //  Method to get a reference to the instance (singleton)
@@ -120,6 +122,11 @@ public class RepositoryServiceImpl implements RepositoryService {
         User user = (User) query.getSingleResult();
 
         entityManager.close();
+
+        if (user == null) {
+            return null;
+        }
+
         return user;
     }
 
@@ -238,11 +245,35 @@ public class RepositoryServiceImpl implements RepositoryService {
     public List<Race> getAllRaces() {
         EntityManager entityManager = getEntityManager();
 
-        List<Race> races = entityManager.createQuery("SELECT r FROM Race r").getResultList();
+        List<Race> races = entityManager.createQuery("SELECT r FROM Race r ORDER BY r.id DESC").getResultList();
 
         entityManager.close();
 
         return races;
+    }
+
+    @Override
+    public Race getCurrentRace() {
+        LocalDate localDate = LocalDate.now();
+        System.out.println("localDate.getDayOfMonth() = " + localDate.getDayOfMonth());
+
+        String monthValue = localDate.getMonth().toString();
+        String month = monthValue.substring(0, 1) + monthValue.substring(1).toLowerCase();
+        System.out.println("month = " + month);
+
+        EntityManager entityManager = getEntityManager();
+
+        Query query = entityManager.createQuery("SELECT r FROM Race r WHERE r.startDay > :localDate AND r.month = :month AND r.year >= :year");
+        query.setParameter("localDate", localDate.getDayOfMonth());
+        query.setParameter("month", month);
+        query.setParameter("year", localDate.getYear());
+
+
+        Race race = (Race) query.getSingleResult();
+
+        entityManager.close();
+
+        return race;
     }
 
     @Override
@@ -414,14 +445,16 @@ public class RepositoryServiceImpl implements RepositoryService {
         addUserGroup(usergroup10);
 
         // TODO: Adds races
-        Race usa = new Race("FORMULA 1 PIRELLI 2018 UNITED STATES GRAND PRIX", "October", 19, 21);
+        Race usa = new Race("FORMULA 1 PIRELLI 2018 UNITED STATES GRAND PRIX","USA",  new Date(2018, 9, 19), new Date(2018, 9, 21));
         addRace(usa);
-        Race mexico = new Race("FORMULA 1 GRAN PREMIO DE MÉXICO 2018", "October", 26, 28);
+        Race mexico = new Race("FORMULA 1 GRAN PREMIO DE MÉXICO 2018","Mexico",  new Date(2018, 9, 26), new Date(2018, 9, 28));
         addRace(mexico);
-        Race brazil = new Race("FORMULA 1 GRANDE PRÊMIO HEINEKEN DO BRASIL 2018", "November", 9, 11);
+        Race brazil = new Race("FORMULA 1 GRANDE PRÊMIO HEINEKEN DO BRASIL 2018","Brazil",  new Date(2018, 10, 9), new Date(2018, 10, 11));
         addRace(brazil);
-        Race abuDhabi = new Race("FORMULA 1 2018 ETIHAD AIRWAYS ABU DHABI GRAND PRIX", "November", 23, 25);
+        Race abuDhabi = new Race("FORMULA 1 2018 ETIHAD AIRWAYS ABU DHABI GRAND PRIX","Abu Dhabi",  new Date(2018, 10, 23), new Date(2018, 10, 25));
         addRace(abuDhabi);
+        Race australia = new Race("FORMULA 1 2018 Australia Melbourne GRAND PRIX","Melbourne",  new Date(2019, 2, 17), new Date(2019, 2, 19));
+        addRace(australia);
 
         // TODO: Adds positions
         Position first = new Position("First");
@@ -508,5 +541,46 @@ public class RepositoryServiceImpl implements RepositoryService {
         addRacePosition(usaP19);
         RacePosition usaP20 = new RacePosition(usa, magnussen, twelfth, 1, 34, 732, none, 1, 35, 59, 300, 0, dq);
         addRacePosition(usaP20);
+
+        RacePosition abudhabi1 = new RacePosition(usa, raikkonen, second, 1, 32, 237, first, 1, 34, 18, 643, 0, nothing);
+        addRacePosition(abudhabi1);
+        RacePosition abudhabi2 = new RacePosition(usa, verstappen, eighteenth, 1, 34, 766, second, 1, 34, 19, 924, 0, nothing);
+        addRacePosition(abudhabi2);
+        RacePosition abudhabi3 = new RacePosition(usa, hamilton, first, 1, 32, 237, third, 1, 34, 20, 985, 0, nothing);
+        addRacePosition(abudhabi3);
+        RacePosition abudhabi4 = new RacePosition(usa, vettel, fifth, 1, 32, 298, fourth, 1, 34, 36, 865, 0, nothing);
+        addRacePosition(abudhabi4);
+        RacePosition abudhabi5 = new RacePosition(usa, bottas, third, 1, 32, 616, fifth, 1, 34, 43, 387, 0, nothing);
+        addRacePosition(abudhabi5);
+        RacePosition abudhabi6 = new RacePosition(usa, hulkenberg, seventh, 1, 34, 215, sixth, 1, 35, 45, 853, 0, nothing);
+        addRacePosition(abudhabi6);
+        RacePosition abudhabi7 = new RacePosition(usa, sainz, eleventh, 1, 34, 566, seventh, 1, 35, 53, 637, 0, nothing);
+        addRacePosition(abudhabi7);
+        RacePosition abudhabi8 = new RacePosition(usa, perez, tenth, 1, 32, 594, eighth, 1, 35, 59, 723, 0, nothing);
+        addRacePosition(abudhabi8);
+        RacePosition abudhabi9 = new RacePosition(usa, hartley, twentieth, 0, 0, 0, ninth, 1, 34, 49, 995, 1, nothing);
+        addRacePosition(abudhabi9);
+        RacePosition abudhabi10 = new RacePosition(usa, ericsson, sixteenth, 1, 35, 536, tenth, 1, 34, 51, 284, 1, nothing);
+        addRacePosition(abudhabi10);
+        RacePosition abudhabi11 = new RacePosition(usa, vandoorne, seventeenth, 1, 35, 736, eleventh, 1, 34, 52, 667, 1, nothing);
+        addRacePosition(abudhabi11);
+        RacePosition abudhabi12 = new RacePosition(usa, gasly, nineteenth, 0, 0, 0, twelfth, 1, 35, 15, 821, 1, nothing);
+        addRacePosition(abudhabi12);
+        RacePosition abudhabi13 = new RacePosition(usa, sirotkin, fourteenth, 1, 35, 362, thirteenth, 1, 35, 28, 139, 1, nothing);
+        addRacePosition(abudhabi13);
+        RacePosition abudhabi14 = new RacePosition(usa, stroll, fifteenth, 1, 35, 480, fourteenth, 1, 34, 40, 494, 2, nothing);
+        addRacePosition(abudhabi14);
+        RacePosition abudhabi15 = new RacePosition(usa, leclerc, ninth, 1, 34, 420, none, 0, 34, 18, 643, 25, dnf);
+        addRacePosition(abudhabi15);
+        RacePosition abudhabi16 = new RacePosition(usa, ricciardo, fourth, 1, 33, 494, none, 0, 13, 32, 870, 48, dnf);
+        addRacePosition(abudhabi16);
+        RacePosition abudhabi17 = new RacePosition(usa, grosjean, eighth, 1, 34, 250, none, 0, 4, 39, 025, 54, dnf);
+        addRacePosition(abudhabi17);
+        RacePosition abudhabi18 = new RacePosition(usa, alonzo, thirteenth, 1, 35, 394, none, 0, 2, 13, 811, 55, dnf);
+        addRacePosition(abudhabi18);
+        RacePosition abudhabi19 = new RacePosition(usa, ocon, sixth, 1, 34, 145, none, 1, 35, 57, 931, 0, dq);
+        addRacePosition(abudhabi19);
+        RacePosition abudhabi20 = new RacePosition(usa, magnussen, twelfth, 1, 34, 732, none, 1, 35, 59, 300, 0, dq);
+        addRacePosition(abudhabi20);
     }
 }

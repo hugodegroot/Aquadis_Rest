@@ -169,6 +169,12 @@ public interface RepositoryService {
 
     /**
      *
+     * @return
+     */
+    Race getCurrentRace();
+
+    /**
+     *
      * @param raceID
      * @return
      */
