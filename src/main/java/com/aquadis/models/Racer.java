@@ -43,6 +43,10 @@ public class Racer {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -63,7 +67,7 @@ public class Racer {
         return salary;
     }
 
-    private void setSalary(int salary) {
+    public void setSalary(int salary) {
         this.salary = salary;
     }
 

@@ -5,10 +5,7 @@ import com.aquadis.rest.model.ClientError;
 import com.aquadis.service.RepositoryService;
 import com.aquadis.service.impl.RepositoryServiceImpl;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -26,14 +23,21 @@ public class RacerResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Racer> getAllRacers(){
-        return service.getallRacers();
+    public List<Racer> getAllRacers() {
+        return service.getAllRacers();
+    }
+
+    @PUT
+    @Path("/racer")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Racer updateSalary(@QueryParam("id") int racerID, @QueryParam("salary") int salary) {
+        return service.updateRacerSalary(racerID, salary);
     }
 
     @GET
     @Path("/{racerID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserFromId(@PathParam("racerID")int racerID){
+    public Response getUserFromId(@PathParam("racerID") int racerID) {
         Racer racer = service.getRacerFromId(racerID);
 
         if (racer == null) {

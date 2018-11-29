@@ -101,7 +101,7 @@ public interface RepositoryService {
      *
      * @return List of racers
      */
-    List<Racer> getallRacers();
+    List<Racer> getAllRacers();
 
     /**
      * this method gets a racer base on its id
@@ -126,6 +126,15 @@ public interface RepositoryService {
      * @return
      */
     List<Racer> getRacersFromTeam(int teamID);
+
+    /**
+     * Updates the salary of a racer
+     *
+     * @param racerID
+     * @param salary
+     * @return
+     */
+    Racer updateRacerSalary(int racerID, int salary);
 
     /**
      * This method adds a racer to the database
@@ -166,6 +175,12 @@ public interface RepositoryService {
      * @return
      */
     List<Race> getAllRaces();
+
+    /**
+     *
+     * @return
+     */
+    Race getCurrentRace();
 
     /**
      *
