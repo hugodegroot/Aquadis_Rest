@@ -1,7 +1,6 @@
 package com.aquadis.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.JoinColumnOrFormula;
 
 import javax.persistence.*;
 
