@@ -25,7 +25,6 @@ public class RaceResource {
     }
 
     /**
-     *
      * @return
      */
     @GET
@@ -35,7 +34,6 @@ public class RaceResource {
     }
 
     /**
-     *
      * @return
      */
     @GET
@@ -46,7 +44,6 @@ public class RaceResource {
     }
 
     /**
-     *
      * @param race
      * @return
      */
@@ -59,7 +56,6 @@ public class RaceResource {
     }
 
     /**
-     *
      * @param raceID
      * @return
      */
@@ -79,7 +75,6 @@ public class RaceResource {
     }
 
     /**
-     *
      * @param raceID
      * @return
      */

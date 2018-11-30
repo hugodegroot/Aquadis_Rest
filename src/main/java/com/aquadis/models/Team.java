@@ -21,11 +21,11 @@ public class Team {
     @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
     private List<Racer> racer;
 
-    public Team (){
+    public Team() {
 
     }
 
-    public Team (String name) {
+    public Team(String name) {
         setName(name);
     }
 

@@ -388,45 +388,45 @@ public class RepositoryServiceImpl implements RepositoryService {
         addTeam(sauber);
 
         // Adds twenty racers to the database
-        Racer hamilton = new Racer( "Lewis", "Hamilton", 7000000, mercedes);
+        Racer hamilton = new Racer("Lewis", "Hamilton", 7000000, mercedes);
         addRacer(hamilton);
-        Racer bottas = new Racer(   "Valtteri", "bottas", 6000000, mercedes);
+        Racer bottas = new Racer("Valtteri", "bottas", 6000000, mercedes);
         addRacer(bottas);
         Racer ricciardo = new Racer("Daniel", "ricciardo", 6000000, redbull);
         addRacer(ricciardo);
-        Racer verstappen =new Racer("Max", "verstappen", 6000000, redbull);
+        Racer verstappen = new Racer("Max", "verstappen", 6000000, redbull);
         addRacer(verstappen);
-        Racer vettel = new Racer(   "Sebastian", "vettel", 7000000, scuderiaFerrari);
+        Racer vettel = new Racer("Sebastian", "vettel", 7000000, scuderiaFerrari);
         addRacer(vettel);
         Racer raikkonen = new Racer("Kimi", "raikkonen", 6000000, scuderiaFerrari);
         addRacer(raikkonen);
-        Racer perez = new Racer(    "Kenneth", "perez", 3000000, forceIndiaF1Team);
+        Racer perez = new Racer("Kenneth", "perez", 3000000, forceIndiaF1Team);
         addRacer(perez);
-        Racer ocon = new Racer(     "Esteban", "ocon", 3000000, forceIndiaF1Team);
+        Racer ocon = new Racer("Esteban", "ocon", 3000000, forceIndiaF1Team);
         addRacer(ocon);
         Racer hulkenberg = new Racer("Nico", "hülkenberg", 4000000, renault);
         addRacer(hulkenberg);
-        Racer sainz = new Racer(    "Carlos", "sainz", 3000000, renault);
+        Racer sainz = new Racer("Carlos", "sainz", 3000000, renault);
         addRacer(sainz);
         Racer vandoorne = new Racer("Stoffel", "vandoorne", 3000000, mcLaren);
         addRacer(vandoorne);
-        Racer alonzo = new Racer(   "Fernando", "alonzo", 4000000, mcLaren);
+        Racer alonzo = new Racer("Fernando", "alonzo", 4000000, mcLaren);
         addRacer(alonzo);
-        Racer stroll = new Racer(   "Lance", "stroll", 2000000, williams);
+        Racer stroll = new Racer("Lance", "stroll", 2000000, williams);
         addRacer(stroll);
-        Racer sirotkin = new Racer( "Sergej", "Sirotkin", 1000000, williams);
+        Racer sirotkin = new Racer("Sergej", "Sirotkin", 1000000, williams);
         addRacer(sirotkin);
-        Racer gasly = new Racer(    "Pierre", "Gasly", 2000000, scuderiaToroRosso);
+        Racer gasly = new Racer("Pierre", "Gasly", 2000000, scuderiaToroRosso);
         addRacer(gasly);
-        Racer hartley = new Racer(  "Brandon", "Hartley", 2000000, scuderiaToroRosso);
+        Racer hartley = new Racer("Brandon", "Hartley", 2000000, scuderiaToroRosso);
         addRacer(hartley);
-        Racer grosjean = new Racer( "Romain", "Grosjean", 2000000, haasF1Team);
+        Racer grosjean = new Racer("Romain", "Grosjean", 2000000, haasF1Team);
         addRacer(grosjean);
         Racer magnussen = new Racer("Kevin", "Magnussen", 3000000, haasF1Team);
         addRacer(magnussen);
-        Racer ericsson = new Racer( "Marcus", "Ericsson", 1000000, sauber);
+        Racer ericsson = new Racer("Marcus", "Ericsson", 1000000, sauber);
         addRacer(ericsson);
-        Racer leclerc = new Racer(  "Charles", "Leclerc", 1000000, sauber);
+        Racer leclerc = new Racer("Charles", "Leclerc", 1000000, sauber);
         addRacer(leclerc);
 
         // Adds three groups to the database
@@ -460,19 +460,19 @@ public class RepositoryServiceImpl implements RepositoryService {
         addUserGroup(usergroup10);
 
         // TODO: Adds races
-        Race usa = new Race("FORMULA 1 PIRELLI 2018 UNITED STATES GRAND PRIX","USA",  new Date(2018, 9, 19), new Date(2018, 9, 21));
+        Race usa = new Race("FORMULA 1 PIRELLI 2018 UNITED STATES GRAND PRIX", "USA", new Date(2018, 9, 19), new Date(2018, 9, 21));
         addRace(usa);
-        Race mexico = new Race("FORMULA 1 GRAN PREMIO DE MÉXICO 2018","Mexico",  new Date(2018, 9, 26), new Date(2018, 9, 28));
+        Race mexico = new Race("FORMULA 1 GRAN PREMIO DE MÉXICO 2018", "Mexico", new Date(2018, 9, 26), new Date(2018, 9, 28));
         addRace(mexico);
-        Race brazil = new Race("FORMULA 1 GRANDE PRÊMIO HEINEKEN DO BRASIL 2018","Brazil",  new Date(2018, 10, 9), new Date(2018, 10, 11));
+        Race brazil = new Race("FORMULA 1 GRANDE PRÊMIO HEINEKEN DO BRASIL 2018", "Brazil", new Date(2018, 10, 9), new Date(2018, 10, 11));
         addRace(brazil);
-        Race abuDhabi = new Race("FORMULA 1 2018 ETIHAD AIRWAYS ABU DHABI GRAND PRIX","Abu Dhabi",  new Date(2018, 10, 23), new Date(2018, 10, 25));
+        Race abuDhabi = new Race("FORMULA 1 2018 ETIHAD AIRWAYS ABU DHABI GRAND PRIX", "Abu Dhabi", new Date(2018, 10, 23), new Date(2018, 10, 25));
         addRace(abuDhabi);
-        Race australia = new Race("FORMULA 1 2019 Australia Melbourne GRAND PRIX","Melbourne",  new Date(2019, 2, 17), new Date(2019, 2, 19));
+        Race australia = new Race("FORMULA 1 2019 Australia Melbourne GRAND PRIX", "Melbourne", new Date(2019, 2, 17), new Date(2019, 2, 19));
         addRace(australia);
-        Race bahrain = new Race("FORMULA 1 2019 Bahrain Sakhir GRAND PRIX","Sakhir",  new Date(2019, 2, 31), new Date(2019, 3, 2));
+        Race bahrain = new Race("FORMULA 1 2019 Bahrain Sakhir GRAND PRIX", "Sakhir", new Date(2019, 2, 31), new Date(2019, 3, 2));
         addRace(bahrain);
-        Race china = new Race("FORMULA 1 2019 China Shanghai GRAND PRIX","Shanghai",  new Date(2019, 3, 14), new Date(2019, 3, 16));
+        Race china = new Race("FORMULA 1 2019 China Shanghai GRAND PRIX", "Shanghai", new Date(2019, 3, 14), new Date(2019, 3, 16));
         addRace(china);
 
         // TODO: Adds positions
