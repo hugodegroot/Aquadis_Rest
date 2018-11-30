@@ -57,7 +57,7 @@ public class RacePosition {
 
         // Sets the laptimes
         LapTime lapTime = new LapTime();
-        lapTime.setTime(bMinutes, bSeconds, bMilliseconds);
+        lapTime.setTime(0, bMinutes, bSeconds, bMilliseconds);
         setBeginTime(lapTime.getTime());
         lapTime.setTime(hours, minutes, seconds, milliseconds);
         setTime(lapTime.getTime());
