@@ -12,6 +12,7 @@ import java.util.List;
 public interface RepositoryService {
 
     // All the methods of the users
+
     /**
      * Getting all users
      *
@@ -72,6 +73,7 @@ public interface RepositoryService {
     UserGroup addUserGroup(UserGroup userGroup);
 
     // All the methods of the groups
+
     /**
      * Getting all groups
      *
@@ -112,7 +114,7 @@ public interface RepositoryService {
     Racer getRacerFromId(int racerID);
 
     /**
-     *  get a specific racer from a team
+     * get a specific racer from a team
      *
      * @param teamID
      * @return
@@ -171,26 +173,22 @@ public interface RepositoryService {
     // All the methods for the races
 
     /**
-     *
      * @return
      */
     List<Race> getAllRaces();
 
     /**
-     *
      * @return
      */
     Race getCurrentRace();
 
     /**
-     *
      * @param raceID
      * @return
      */
     Race getRaceFromId(int raceID);
 
     /**
-     *
      * @param raceID
      * @return
      */

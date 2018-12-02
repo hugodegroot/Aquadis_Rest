@@ -60,7 +60,7 @@ public class GroupResource {
     @GET
     @Path("/{groupID}/predictions")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPredictionsFromGroup(@PathParam("groupID") int groupID){
+    public Response getPredictionsFromGroup(@PathParam("groupID") int groupID) {
         // TODO: show the predictions of that group
         return null;
     }

@@ -2,7 +2,6 @@ package com.aquadis.rest.resources;
 
 import com.aquadis.models.Race;
 import com.aquadis.models.RacePosition;
-import com.aquadis.models.User;
 import com.aquadis.rest.model.ClientError;
 import com.aquadis.service.RepositoryService;
 import com.aquadis.service.impl.RepositoryServiceImpl;
@@ -25,7 +24,6 @@ public class RaceResource {
     }
 
     /**
-     *
      * @return
      */
     @GET
@@ -35,7 +33,6 @@ public class RaceResource {
     }
 
     /**
-     *
      * @return
      */
     @GET
@@ -46,7 +43,6 @@ public class RaceResource {
     }
 
     /**
-     *
      * @param race
      * @return
      */
@@ -59,7 +55,6 @@ public class RaceResource {
     }
 
     /**
-     *
      * @param raceID
      * @return
      */
@@ -79,7 +74,6 @@ public class RaceResource {
     }
 
     /**
-     *
      * @param raceID
      * @return
      */

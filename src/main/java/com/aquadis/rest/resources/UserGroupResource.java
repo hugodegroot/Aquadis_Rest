@@ -26,17 +26,17 @@ public class UserGroupResource {
     @GET
     @Path("/{ID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<UserGroup> getAllUserGroups(@PathParam("ID") int ID){
+    public List<UserGroup> getAllUserGroups(@PathParam("ID") int ID) {
         return service.getAllUserGroups(ID);
     }
 
     @GET
     @Path("/groups")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getGroupsFromUser(@PathParam("userID") int userID){
+    public Response getGroupsFromUser(@PathParam("userID") int userID) {
         User user = service.getUserFromId(userID);
 
-        if (user == null){
+        if (user == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(new ClientError("Cannot find user with id: " + userID)).build();
         }
@@ -49,10 +49,10 @@ public class UserGroupResource {
     @GET
     @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getGroupsFromGroup(@PathParam("groupID") int groupID){
-        Group group= service.getGroupFromId(groupID);
+    public Response getGroupsFromGroup(@PathParam("groupID") int groupID) {
+        Group group = service.getGroupFromId(groupID);
 
-        if (group == null){
+        if (group == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(new ClientError("Cannot find group with id: " + groupID)).build();
         }
