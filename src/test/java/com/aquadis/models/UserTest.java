@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 /**
@@ -15,7 +16,7 @@ public class UserTest {
 
     @Before
     public void setUp() {
-        user = new User("lkorn.9520@gmail.com", "Lorenzo", "Korn", "lorenzo123", 1); // Arrange
+        user = new User("lkorn.9520@gmail.com", "Lorenzo", "Korn", "lorenzo123", 1);
     }
 
     @Test
@@ -23,7 +24,8 @@ public class UserTest {
         String expected = "lkorn.9520@gmail.com";
         String result = user.getEmail();
 
-        assertEquals(expected, result);
+
+        assertThat("Not the correct email!", expected, is(result));
     }
 
     @Test
@@ -38,7 +40,7 @@ public class UserTest {
         String expected = "Lorenzo";
         String result = user.getFirstName();
 
-        assertEquals(expected, result);
+        assertThat("Not the correct name!", expected, is(result));
     }
 
     @Test
@@ -53,7 +55,7 @@ public class UserTest {
         String expected = "Korn";
         String result = user.getLastName();
 
-        assertEquals(expected, result);
+        assertThat("Not the correct name!", expected, is(result));
     }
 
     @Test
@@ -68,15 +70,14 @@ public class UserTest {
         String expected = "lorenzo123";
         String result = user.getPassword();
 
-        assertEquals(expected, result);
+        assertThat("Not the correct password!", expected, is(result));
     }
 
     @Test
     public void getPasswordReturnPasswordNotNull() {
-        String expected = "lorenzo123";
         String result = user.getPassword();
 
-        assertEquals(expected, result);
+        assertNotNull(result);
     }
 
     @Test
@@ -84,7 +85,7 @@ public class UserTest {
         int expected = 1;
         int result = user.getAdminStatus();
 
-        assertEquals(expected, result);
+        assertThat("This user is an admin!", expected, is(result));
     }
 
     @Test
