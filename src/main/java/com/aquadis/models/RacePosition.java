@@ -54,15 +54,20 @@ public class RacePosition {
         setBeginPosition(beginPosition);
         setEndPosition(endPosition);
 
-        // Sets the laptimes
-        LapTime lapTime = new LapTime();
-        lapTime.setTime(0, bMinutes, bSeconds, bMilliseconds);
-        setBeginTime(lapTime.getTime());
-        lapTime.setTime(hours, minutes, seconds, milliseconds);
-        setTime(lapTime.getTime());
+        try {
 
-        setLaps(laps);
-        setStatus(status);
+            // Sets the laptimes
+            LapTime lapTime = new LapTime();
+            lapTime.setTime(0, bMinutes, bSeconds, bMilliseconds);
+            setBeginTime(lapTime.getTime());
+            lapTime.setTime(hours, minutes, seconds, milliseconds);
+            setTime(lapTime.getTime());
+
+            setLaps(laps);
+            setStatus(status);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Race getRace() {
