@@ -17,7 +17,7 @@ public class LapTimeTest {
 
     @Test
     public void setTimeWithHoursReturnCorrectFormat() {
-        // Correct format is: h:m:s.ms
+        // Correct format is: hh:mm:ss.ms
         time.setTime(0,1, 34, 654);
 
         String expected = "01:34.654";
@@ -28,7 +28,7 @@ public class LapTimeTest {
 
     @Test
     public void setTimeWithZeroHoursReturnCorrectFormat() {
-        // Correct format is: m:s.ms
+        // Correct format is: hh:mm:ss.ms
         time.setTime(2,12, 34, 654);
 
         String expected = "02:12:34.654";
@@ -39,7 +39,7 @@ public class LapTimeTest {
 
     @Test
     public void setTimeWithZeroHoursAndZeroToNineMinutesReturnCorrectFormat() {
-        // Correct format is: m:s.ms
+        // Correct format is: hh:mm:ss.ms
         time.setTime(2,1, 34, 654);
 
         String expected = "02:01:34.654";
@@ -50,10 +50,32 @@ public class LapTimeTest {
 
     @Test
     public void setTimeWithZeroHoursAndZeroToNineSecondsReturnCorrectFormat() {
-        // Correct format is: m:s.ms
+        // Correct format is: hh:mm:ss.ms
         time.setTime(2,53, 8, 654);
 
         String expected = "02:53:08.654";
+        String result = time.getTime();
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void setTimeWithAHundredsOfASecondReturnCorrectFormat(){
+        // Correct format is: hh:mm:ss.ms
+        time.setTime(2,53, 8, 54);
+
+        String expected = "02:53:08.054";
+        String result = time.getTime();
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void setTimeWithAThousandsOfASecondReturnCorrectFormat(){
+        // Correct format is: hh:mm:ss.ms
+        time.setTime(2,53, 8, 4);
+
+        String expected = "02:53:08.004";
         String result = time.getTime();
 
         assertEquals(expected, result);
