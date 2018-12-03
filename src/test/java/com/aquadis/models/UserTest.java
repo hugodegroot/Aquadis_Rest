@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * @author Lorenzo
+ * @author Lorenzo, Jan-Willem
  */
 public class UserTest {
 
@@ -21,9 +21,9 @@ public class UserTest {
     @Test
     public void getEmailReturnEmail() {
         String expected = "lkorn.9520@gmail.com";
-        String result = user.getEmail(); // Act
+        String result = user.getEmail();
 
-        assertEquals(expected, result); // Assert
+        assertEquals(expected, result);
     }
 
     @Test
