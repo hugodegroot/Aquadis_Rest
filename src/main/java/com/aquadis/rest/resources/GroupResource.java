@@ -64,6 +64,21 @@ public class GroupResource {
         // TODO: show the predictions of that group
         return null;
     }
+    
+    /**
+     * Adds a group to the database
+     *
+     * @param group specific group
+     * @return added group
+     */
+    @POST
+    @Path("/group")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Group addGroup(Group group) {
+        return service.addGroup(group);
+    }
+
 
     /**
      * Adds a group to the database
