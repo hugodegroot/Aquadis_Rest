@@ -10,7 +10,7 @@ public class HelloResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String sayHello(){
+    public String sayHello() {
         return "hello!";
     }
 }

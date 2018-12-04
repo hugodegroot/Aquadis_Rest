@@ -13,4 +13,9 @@
       <module name="aquadis" target="1.7" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="aquadis-app" options="-endorseddirs &quot;C:\Users\Lorenzo\Documents\School\Jaar 2\Project EWA\aquadis-app\target/endorsed&quot;" />
+    </option>
+  </component>
 </project>

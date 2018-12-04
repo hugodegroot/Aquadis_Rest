@@ -8,6 +8,10 @@ import javax.persistence.*;
 @Table(name = "User_Group")
 public class UserGroup {
 
+    @Transient
+    @JsonIgnore
+    private final int START_BUDGET = 20000000;
+
     @Id
     @Column(name = "UserGroup_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +23,7 @@ public class UserGroup {
     @Column(name = "role")
     private String role;
 
-    @Column(name = "budget", columnDefinition = "int default 20000000")
+    @Column(name = "budget")
     private int budget;
 
     @ManyToOne
@@ -41,7 +45,7 @@ public class UserGroup {
         setRole(role);
         setUser(user);
         setGroup(group);
-        setBudget(20000000);
+        setBudget(START_BUDGET);
     }
 
     public int getId() {

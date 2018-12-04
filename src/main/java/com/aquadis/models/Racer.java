@@ -28,18 +28,18 @@ public class Racer {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    public Racer(){
+    public Racer() {
 
     }
 
-    public Racer(String firstName, String lastName, int salary, Team team){
+    public Racer(String firstName, String lastName, int salary, Team team) {
         setFirstName(firstName);
         setLastName(lastName);
         setSalary(salary);
         setTeam(team);
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 

@@ -57,7 +57,6 @@ public class UserResource {
     }
 
     /**
-     *
      * @param email
      * @param password
      * @return
@@ -67,7 +66,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUsers(
             @QueryParam("email") String email,
-            @QueryParam("password") String password){
+            @QueryParam("password") String password) {
 
         User user = service.getUserFromloginFields(email, password);
 
