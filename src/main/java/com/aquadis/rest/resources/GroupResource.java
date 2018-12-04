@@ -57,6 +57,14 @@ public class GroupResource {
                 .entity(group).build();
     }
 
+    @GET
+    @Path("/{groupID}/predictions")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPredictionsFromGroup(@PathParam("groupID") int groupID) {
+        // TODO: show the predictions of that group
+        return null;
+    }
+    
     /**
      * Adds a group to the database
      *
@@ -71,19 +79,6 @@ public class GroupResource {
         return service.addGroup(group);
     }
 
-    /**
-     * Adds a user to the database
-     *
-     * @param user specific user
-     * @return added user
-     */
-    @POST
-    @Path("/user")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public User addUser(User user) {
-        return service.addUser(user);
-    }
 
     /**
      * Adds a group to the database
