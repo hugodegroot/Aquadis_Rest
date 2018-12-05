@@ -2,6 +2,7 @@ package com.aquadis.service.impl;
 
 import com.aquadis.models.*;
 import com.aquadis.service.RepositoryService;
+import org.glassfish.jersey.client.Initializable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -22,7 +23,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     // An instance of the service is created and during class initialisation
     static {
         instance = new RepositoryServiceImpl();
-//        instance.loadExamples();
+        instance.loadExamples();
     }
 
     //  Method to get a reference to the instance (singleton)
@@ -30,11 +31,8 @@ public class RepositoryServiceImpl implements RepositoryService {
         return instance;
     }
 
-    // An attribute that stores all users (in memory)
-    private Map<Integer, User> elements;
-
     private RepositoryServiceImpl() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("aquadisPU");
+        entityManagerFactory = Persistence.createEntityManagerFactory("aquadis_persistence_unit");
     }
 
     private EntityManager getEntityManager() {

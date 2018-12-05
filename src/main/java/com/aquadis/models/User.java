@@ -33,6 +33,9 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserGroup> groups;
 
+//    @OneToMany(mappedBy = "userMax", fetch = FetchType.EAGER)
+//    private List<MaxPositionPrediction> maxPositionPredictions;
+
     public User() {
     }
 
@@ -92,6 +95,14 @@ public class User {
         this.isAdmin = status;
     }
 
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
     public List<UserGroup> getGroups() {
         return groups;
     }
@@ -99,4 +110,12 @@ public class User {
     public void setGroups(List<UserGroup> groups) {
         this.groups = groups;
     }
+
+//    public List<MaxPositionPrediction> getMaxPositionPredictions() {
+//        return maxPositionPredictions;
+//    }
+//
+//    public void setMaxPositionPredictions(List<MaxPositionPrediction> maxPositionPredictions) {
+//        this.maxPositionPredictions = maxPositionPredictions;
+//    }
 }
