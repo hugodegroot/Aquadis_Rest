@@ -30,8 +30,8 @@ public class Race {
     @OneToMany(mappedBy = "race", fetch = FetchType.EAGER)
     private List<RacePosition> positions;
 
-    @OneToMany(mappedBy = "race", fetch = FetchType.EAGER)
-    private List<MaxPositionPrediction> maxPositionPredictions;
+//    @OneToMany(mappedBy = "raceMax", fetch = FetchType.EAGER)
+//    private List<MaxPositionPrediction> maxPositionPredictions;
 
     public Race() {
     }
@@ -91,11 +91,11 @@ public class Race {
         this.positions = positions;
     }
 
-    public List<MaxPositionPrediction> getMaxPositionPredictions() {
-        return maxPositionPredictions;
-    }
-
-    public void setMaxPositionPredictions(List<MaxPositionPrediction> maxPositionPredictions) {
-        this.maxPositionPredictions = maxPositionPredictions;
-    }
+//    public List<MaxPositionPrediction> getMaxPositionPredictions() {
+//        return maxPositionPredictions;
+//    }
+//
+//    public void setMaxPositionPredictions(List<MaxPositionPrediction> maxPositionPredictions) {
+//        this.maxPositionPredictions = maxPositionPredictions;
+//    }
 }

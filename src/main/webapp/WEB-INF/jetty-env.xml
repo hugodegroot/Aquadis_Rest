@@ -1,5 +1,5 @@
 <Configure id='wac' class="org.eclipse.jetty.webapp.WebAppContext">
-    <New id="flashCardDs" class="org.eclipse.jetty.plus.jndi.Resource">
+    <New id="aquadis" class="org.eclipse.jetty.plus.jndi.Resource">
         <Arg>jdbc/aquadisDB</Arg>
         <Arg>
             <New class="org.apache.commons.dbcp2.BasicDataSource">

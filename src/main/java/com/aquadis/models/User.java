@@ -33,8 +33,8 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserGroup> groups;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<MaxPositionPrediction> maxPositionPredictions;
+//    @OneToMany(mappedBy = "userMax", fetch = FetchType.EAGER)
+//    private List<MaxPositionPrediction> maxPositionPredictions;
 
     public User() {
     }
@@ -111,11 +111,11 @@ public class User {
         this.groups = groups;
     }
 
-    public List<MaxPositionPrediction> getMaxPositionPredictions() {
-        return maxPositionPredictions;
-    }
-
-    public void setMaxPositionPredictions(List<MaxPositionPrediction> maxPositionPredictions) {
-        this.maxPositionPredictions = maxPositionPredictions;
-    }
+//    public List<MaxPositionPrediction> getMaxPositionPredictions() {
+//        return maxPositionPredictions;
+//    }
+//
+//    public void setMaxPositionPredictions(List<MaxPositionPrediction> maxPositionPredictions) {
+//        this.maxPositionPredictions = maxPositionPredictions;
+//    }
 }
