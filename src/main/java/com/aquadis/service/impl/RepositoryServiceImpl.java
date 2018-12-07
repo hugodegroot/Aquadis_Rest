@@ -23,7 +23,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     // An instance of the service is created and during class initialisation
     static {
         instance = new RepositoryServiceImpl();
-        instance.loadExamples();
+//        instance.loadExamples();
     }
 
     //  Method to get a reference to the instance (singleton)
@@ -428,7 +428,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         addRacer(leclerc);
 
         // Adds three groups to the database
-        Group group1 = new Group("ALLIGAT0R_BL00Ds group");
+        Group group1 = new Group("Lorenzo\'s group");
         addGroup(group1);
         Group group2 = new Group("School");
         addGroup(group2);
