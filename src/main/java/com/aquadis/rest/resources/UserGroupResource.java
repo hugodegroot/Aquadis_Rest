@@ -47,6 +47,48 @@ public class UserGroupResource {
     }
 
     @GET
+    @Path("/groups/{groupID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getGroupFromUser(@PathParam("userID") int userID, @PathParam("groupID") int groupID) {
+        User user = service.getUserFromId(userID);
+
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ClientError("Cannot find user with id: " + userID)).build();
+        }
+
+        Group group = service.getGroupFromId(groupID);
+
+        if (group == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ClientError("Cannot find group with id: " + groupID)).build();
+        }
+
+        return Response.status(Response.Status.OK).entity(group).build();
+    }
+
+    @GET
+    @Path("/groups/{groupID}/users")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUsersFromGroup(@PathParam("userID") int userID, @PathParam("groupID") int groupID) {
+        User user = service.getUserFromId(userID);
+
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ClientError("Cannot find user with id: " + userID)).build();
+        }
+
+        Group group = service.getGroupFromId(groupID);
+
+        if (group == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ClientError("Cannot find group with id: " + groupID)).build();
+        }
+
+        return Response.status(Response.Status.OK).entity(group.getUsers()).build();
+    }
+
+    @GET
     @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getGroupsFromGroup(@PathParam("groupID") int groupID) {
