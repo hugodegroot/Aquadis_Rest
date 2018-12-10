@@ -81,6 +81,32 @@ public class UserResource {
     }
 
     /**
+     * @param email
+     * @param firstName
+     * @param lastName
+     * @return
+     */
+    @GET
+    @Path("/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUsersByEmailOrName(
+            @QueryParam("email") String email,
+            @QueryParam("firstname") String firstName,
+            @QueryParam("firstname") String lastName) {
+
+        List<User> users = service.getUsersByEmailOrName(email, firstName, lastName);
+
+        if (users == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ClientError("Cannot find user with email: " + email + "or name: " + firstName + " " + lastName)).build();
+        }
+
+        return Response.status(Response.Status.OK)
+                .entity(users).build();
+
+    }
+
+    /**
      * Adds a user to the database
      *
      * @param user specific user

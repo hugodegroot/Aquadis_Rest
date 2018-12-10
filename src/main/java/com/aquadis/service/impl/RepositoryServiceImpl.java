@@ -49,6 +49,25 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
+    public List<User> getUsersByEmailOrName(String email, String firstName, String lastName) {
+        EntityManager entityManager = getEntityManager();
+
+        Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.email like CONCAT('%',:email,'%') OR u.firstName like CONCAT('%',:firstName,'%') OR u.lastName like CONCAT('%',:lastName,'%')");
+        query.setParameter("email", email);
+        query.setParameter("firstName", firstName);
+        query.setParameter("lastName", lastName);
+
+        System.out.println("KAK!" + query.toString());
+
+        List<User> users = query.getResultList();
+
+        entityManager.close();
+
+        return users;
+
+    }
+
+    @Override
     public User getUserFromId(int userID) {
         EntityManager entityManager = getEntityManager();
 
