@@ -10,6 +10,7 @@ import com.aquadis.service.impl.RepositoryServiceImpl;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -28,6 +29,14 @@ public class UserGroupResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserGroup> getAllUserGroups(@PathParam("ID") int ID) {
         return service.getAllUserGroups(ID);
+    }
+
+    @POST
+    @Path("/usergroup")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public UserGroup addUserGroup(UserGroup userGroup){
+        return service.addUserGroup(userGroup);
     }
 
     @GET
@@ -85,7 +94,10 @@ public class UserGroupResource {
                     .entity(new ClientError("Cannot find group with id: " + groupID)).build();
         }
 
-        return Response.status(Response.Status.OK).entity(group.getUsers()).build();
+        List<UserGroup> users = group.getUsers();
+        users.sort((o1, o2) -> o2.getPoints() - o1.getPoints());
+
+        return Response.status(Response.Status.OK).entity(users).build();
     }
 
     @GET
