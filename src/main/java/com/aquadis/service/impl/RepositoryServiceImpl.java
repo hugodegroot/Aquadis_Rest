@@ -2,13 +2,11 @@ package com.aquadis.service.impl;
 
 import com.aquadis.models.*;
 import com.aquadis.service.RepositoryService;
-import org.glassfish.jersey.client.Initializable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Lorenzo
@@ -109,7 +107,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
-    public User getUserFromloginFields(String email, String password) {
+    public User getUserFromLoginFields(String email, String password) {
         EntityManager entityManager = getEntityManager();
 
         Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = :email AND u.password = :password");
@@ -362,6 +360,8 @@ public class RepositoryServiceImpl implements RepositoryService {
         addUser(janWillem);
         User hugo = new User("hugo123@outlook.nl", "Hugo", "de Groot", "hugo123", 0);
         addUser(hugo);
+        User john = new User("johnDough@outlook.nl", "John", "Dough", "jd123", 1);
+        addUser(john);
 
         // Adds the teams to the database
         Team mercedes = new Team("Mercedes");

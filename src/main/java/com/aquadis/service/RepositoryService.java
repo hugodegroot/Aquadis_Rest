@@ -31,11 +31,11 @@ public interface RepositoryService {
     /**
      * validate user by username and password
      *
-     * @param username
+     * @param email
      * @param password
      * @return
      */
-    User getUserFromloginFields(String username, String password);
+    User getUserFromLoginFields(String email, String password);
 
     /**
      * Adding a user into the database
@@ -199,9 +199,24 @@ public interface RepositoryService {
      */
     List<RacePosition> getRacePositionsFromRace(int raceID);
 
+    /**
+     *
+     * @param race
+     * @return
+     */
     Race addRace(Race race);
 
+    /**
+     *
+     * @param racePosition
+     * @return
+     */
     RacePosition addRacePosition(RacePosition racePosition);
 
+    /**
+     *
+     * @param position
+     * @return
+     */
     Position addPosition(Position position);
 }

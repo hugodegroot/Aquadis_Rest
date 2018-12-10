@@ -44,7 +44,15 @@ public class User {
         setFirstName(firstName);
         setLastName(lastName);
         setPassword(password);
-        setAdminStatus(isAdmin);
+        setIsAdmin(isAdmin);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -79,27 +87,11 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    private void setId(int id) {
-        this.id = id;
-    }
-
-    public int getAdminStatus() {
-        return isAdmin;
-    }
-
-    private void setAdminStatus(int status) {
-        this.isAdmin = status;
-    }
-
     public int getIsAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(int isAdmin) {
+    private void setIsAdmin(int isAdmin) {
         this.isAdmin = isAdmin;
     }
 
@@ -111,7 +103,7 @@ public class User {
         this.groups = groups;
     }
 
-//    public List<MaxPositionPrediction> getMaxPositionPredictions() {
+    //    public List<MaxPositionPrediction> getMaxPositionPredictions() {
 //        return maxPositionPredictions;
 //    }
 //
