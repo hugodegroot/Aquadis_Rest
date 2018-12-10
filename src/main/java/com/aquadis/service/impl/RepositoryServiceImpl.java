@@ -2,6 +2,7 @@ package com.aquadis.service.impl;
 
 import com.aquadis.models.*;
 import com.aquadis.service.RepositoryService;
+import org.glassfish.jersey.client.Initializable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -30,11 +31,8 @@ public class RepositoryServiceImpl implements RepositoryService {
         return instance;
     }
 
-    // An attribute that stores all users (in memory)
-    private Map<Integer, User> elements;
-
     private RepositoryServiceImpl() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("aquadisPU");
+        entityManagerFactory = Persistence.createEntityManagerFactory("aquadis_persistence_unit");
     }
 
     private EntityManager getEntityManager() {
@@ -430,7 +428,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         addRacer(leclerc);
 
         // Adds three groups to the database
-        Group group1 = new Group("ALLIGAT0R_BL00Ds group");
+        Group group1 = new Group("Lorenzo\'s group");
         addGroup(group1);
         Group group2 = new Group("School");
         addGroup(group2);

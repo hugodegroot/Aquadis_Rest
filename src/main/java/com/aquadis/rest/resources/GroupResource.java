@@ -1,7 +1,6 @@
 package com.aquadis.rest.resources;
 
 import com.aquadis.models.Group;
-import com.aquadis.models.User;
 import com.aquadis.rest.model.ClientError;
 import com.aquadis.service.RepositoryService;
 import com.aquadis.service.impl.RepositoryServiceImpl;
@@ -64,7 +63,7 @@ public class GroupResource {
         // TODO: show the predictions of that group
         return null;
     }
-    
+
     /**
      * Adds a group to the database
      *

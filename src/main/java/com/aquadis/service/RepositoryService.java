@@ -46,6 +46,11 @@ public interface RepositoryService {
 
     // All the methods of the usergroups
 
+    /**
+     *
+     * @param ID
+     * @return
+     */
     List<UserGroup> getAllUserGroups(int ID);
 
     /**
