@@ -37,7 +37,7 @@ public class RacerResource {
     @GET
     @Path("/{racerID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserFromId(@PathParam("racerID") int racerID) {
+    public Response getRacerFromId(@PathParam("racerID") int racerID) {
         Racer racer = service.getRacerFromId(racerID);
 
         if (racer == null) {

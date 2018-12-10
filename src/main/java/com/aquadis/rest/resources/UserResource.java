@@ -68,7 +68,7 @@ public class UserResource {
             @QueryParam("email") String email,
             @QueryParam("password") String password) {
 
-        User user = service.getUserFromloginFields(email, password);
+        User user = service.getUserFromLoginFields(email, password);
 
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND)

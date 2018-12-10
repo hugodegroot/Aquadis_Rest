@@ -30,6 +30,14 @@ public class UserGroupResource {
         return service.getAllUserGroups(ID);
     }
 
+    @POST
+    @Path("/usergroup")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public UserGroup addUserGroup(UserGroup userGroup){
+        return service.addUserGroup(userGroup);
+    }
+
     @GET
     @Path("/groups")
     @Produces(MediaType.APPLICATION_JSON)
@@ -70,7 +78,7 @@ public class UserGroupResource {
     @GET
     @Path("/groups/{groupID}/users")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUsersFromGroup(@PathParam("userID") int userID, @PathParam("groupID") int groupID) {
+    public Response getUsersPointsFromGroup(@PathParam("userID") int userID, @PathParam("groupID") int groupID) {
         User user = service.getUserFromId(userID);
 
         if (user == null) {
@@ -85,13 +93,16 @@ public class UserGroupResource {
                     .entity(new ClientError("Cannot find group with id: " + groupID)).build();
         }
 
-        return Response.status(Response.Status.OK).entity(group.getUsers()).build();
+        List<UserGroup> users = group.getUsers();
+        users.sort((o1, o2) -> o2.getPoints() - o1.getPoints());
+
+        return Response.status(Response.Status.OK).entity(users).build();
     }
 
     @GET
     @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getGroupsFromGroup(@PathParam("groupID") int groupID) {
+    public Response getUsersFromGroup(@PathParam("groupID") int groupID) {
         Group group = service.getGroupFromId(groupID);
 
         if (group == null) {

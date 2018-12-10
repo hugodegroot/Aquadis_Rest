@@ -28,6 +28,14 @@ public class Position {
         setPlace(place);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getPlace() {
         return place;
     }
