@@ -70,6 +70,14 @@ public class RacePosition {
         }
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Race getRace() {
         return race;
     }
@@ -82,7 +90,7 @@ public class RacePosition {
         return beginPosition;
     }
 
-    public void setBeginPosition(Position beginPosition) {
+    private void setBeginPosition(Position beginPosition) {
         this.beginPosition = beginPosition;
     }
 
@@ -90,7 +98,7 @@ public class RacePosition {
         return endPosition;
     }
 
-    public void setEndPosition(Position endPosition) {
+    private void setEndPosition(Position endPosition) {
         this.endPosition = endPosition;
     }
 
