@@ -44,7 +44,7 @@ public class GroupResource {
     @GET
     @Path("/{groupID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserFromID(@PathParam("groupID") int groupID) {
+    public Response getGroupFromID(@PathParam("groupID") int groupID) {
         Group group = service.getGroupFromId(groupID);
 
         if (group == null) {
@@ -82,11 +82,10 @@ public class GroupResource {
     /**
      * Adds a group to the database
      *
-     * @param groupID specific group
      * @return added group
      */
     @Path("/{groupID}/ug")
-    public UserGroupResource getUserGroupResource(@PathParam("groupID") int groupID) {
+    public UserGroupResource getUserGroupResource() {
         return new UserGroupResource();
     }
 }

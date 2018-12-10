@@ -43,18 +43,6 @@ public class RaceResource {
     }
 
     /**
-     * @param race
-     * @return
-     */
-    @POST
-    @Path("/race")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Race addRAce(Race race) {
-        return service.addRace(race);
-    }
-
-    /**
      * @param raceID
      * @return
      */
@@ -72,6 +60,19 @@ public class RaceResource {
         return Response.status(Response.Status.OK)
                 .entity(race).build();
     }
+
+    /**
+     * @param race
+     * @return
+     */
+    @POST
+    @Path("/race")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Race addrace(Race race) {
+        return service.addRace(race);
+    }
+
 
     /**
      * @param raceID

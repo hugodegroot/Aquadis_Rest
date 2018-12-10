@@ -28,7 +28,7 @@ public class TeamResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Team> getAllUsers() {
+    public List<Team> getAllTeams() {
         return service.getAllTeams();
     }
 
@@ -49,7 +49,7 @@ public class TeamResource {
     @GET
     @Path("/{teamID}/racers")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRacersfromTeam(@PathParam("teamID") int teamID) {
+    public Response getRacersFromTeam(@PathParam("teamID") int teamID) {
         Team team = service.getTeamFromId(teamID);
 
         if (team == null) {

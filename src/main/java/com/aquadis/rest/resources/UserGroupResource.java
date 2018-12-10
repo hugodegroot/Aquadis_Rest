@@ -10,7 +10,6 @@ import com.aquadis.service.impl.RepositoryServiceImpl;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -79,7 +78,7 @@ public class UserGroupResource {
     @GET
     @Path("/groups/{groupID}/users")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUsersFromGroup(@PathParam("userID") int userID, @PathParam("groupID") int groupID) {
+    public Response getUsersPointsFromGroup(@PathParam("userID") int userID, @PathParam("groupID") int groupID) {
         User user = service.getUserFromId(userID);
 
         if (user == null) {
@@ -103,7 +102,7 @@ public class UserGroupResource {
     @GET
     @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getGroupsFromGroup(@PathParam("groupID") int groupID) {
+    public Response getUsersFromGroup(@PathParam("groupID") int groupID) {
         Group group = service.getGroupFromId(groupID);
 
         if (group == null) {
