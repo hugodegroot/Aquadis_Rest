@@ -38,6 +38,17 @@ public interface RepositoryService {
     User getUserFromLoginFields(String email, String password);
 
     /**
+     *
+     * Get users by email or name
+     *
+     * @param email
+     * @param firstName
+     * @param lastName
+     * @return
+     */
+    List<User> getUsersByEmailOrName(String email, String firstName, String lastName);
+
+    /**
      * Adding a user into the database
      *
      * @param user
