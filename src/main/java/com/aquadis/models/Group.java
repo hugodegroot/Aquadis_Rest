@@ -1,5 +1,9 @@
 package com.aquadis.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,7 +23,13 @@ public class Group {
     private String name;
 
     @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<UserGroup> users;
+
+    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<UserGroup> races;
 
     public Group() {
     }
@@ -50,5 +60,13 @@ public class Group {
 
     public void setUsers(List<UserGroup> users) {
         this.users = users;
+    }
+
+    public List<UserGroup> getRaces() {
+        return races;
+    }
+
+    public void setRaces(List<UserGroup> races) {
+        this.races = races;
     }
 }

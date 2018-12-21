@@ -1,5 +1,9 @@
 package com.aquadis.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -31,10 +35,17 @@ public class User {
     private int isAdmin = 0;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<UserGroup> groups;
 
-//    @OneToMany(mappedBy = "userMax", fetch = FetchType.EAGER)
-//    private List<MaxPositionPrediction> maxPositionPredictions;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<UserGroup> races;
+
+    @OneToMany(mappedBy = "userMax", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<MaxPrediction> maxPositionPredictions;
 
     public User() {
     }
@@ -103,11 +114,19 @@ public class User {
         this.groups = groups;
     }
 
-    //    public List<MaxPositionPrediction> getMaxPositionPredictions() {
-//        return maxPositionPredictions;
-//    }
-//
-//    public void setMaxPositionPredictions(List<MaxPositionPrediction> maxPositionPredictions) {
-//        this.maxPositionPredictions = maxPositionPredictions;
-//    }
+    public List<UserGroup> getRaces() {
+        return races;
+    }
+
+    public void setRaces(List<UserGroup> races) {
+        this.races = races;
+    }
+
+    public List<MaxPrediction> getMaxPositionPredictions() {
+        return maxPositionPredictions;
+    }
+
+    public void setMaxPositionPredictions(List<MaxPrediction> maxPositionPredictions) {
+        this.maxPositionPredictions = maxPositionPredictions;
+    }
 }

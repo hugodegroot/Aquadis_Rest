@@ -1,5 +1,8 @@
 package com.aquadis.models;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,9 +19,11 @@ public class Position {
     private String place;
 
     @OneToMany(mappedBy = "beginPosition", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<RacePosition> races;
 
     @OneToMany(mappedBy = "endPosition", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<RacePosition> races1;
 
     public Position() {

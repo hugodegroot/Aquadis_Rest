@@ -20,8 +20,10 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     // An instance of the service is created and during class initialisation
     static {
+        System.out.println("Make new instance.");
         instance = new RepositoryServiceImpl();
-//        instance.loadExamples();
+        System.out.println("Load examples.");
+        instance.loadExamples();
     }
 
     //  Method to get a reference to the instance (singleton)
@@ -30,6 +32,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     private RepositoryServiceImpl() {
+        System.out.println("Connect to database.");
         entityManagerFactory = Persistence.createEntityManagerFactory("aquadis_persistence_unit");
     }
 
@@ -39,8 +42,10 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public List<User> getAllUsers() {
+        System.out.println("Before get all users.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Get all users create query.");
         List<User> users = entityManager.createQuery("SELECT u from User u").getResultList();
 
         entityManager.close();
@@ -69,8 +74,10 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public User getUserFromId(int userID) {
+        System.out.println("Before get user from id");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before find user.");
         User user = entityManager.find(User.class, userID);
 
         entityManager.close();
@@ -80,16 +87,20 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public User addUser(User user) {
+        System.out.println("Before add user.");
         return (User) addEntity(user);
     }
 
     @Override
     public List<UserGroup> getAllUserGroups(int ID) {
+        System.out.println("Before get all user groups.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get al user groups create query.");
         Query query = entityManager.createQuery("SELECT ug FROM UserGroup ug WHERE ug.user.id = :ID");
         query.setParameter("ID", ID);
 
+        System.out.println("Before get result list.");
         List<UserGroup> userGroups = query.getResultList();
 
         entityManager.close();
@@ -99,11 +110,14 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public List<UserGroup> getAllUserGroupsFromUser(int userID) {
+        System.out.println("Before get all user groups from user.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get all user groups from user create query.");
         Query query = entityManager.createQuery("SELECT g FROM UserGroup ug INNER JOIN ug.group g WHERE ug.user.id = :userID");
         query.setParameter("userID", userID);
 
+        System.out.println("Before get result list.");
         List<UserGroup> userGroups = query.getResultList();
 
         entityManager.close();
@@ -113,11 +127,14 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public List<UserGroup> getAllUserGroupsFromGroup(int groupID) {
+        System.out.println("Before get all user groups from group.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get all user groups from group create query.");
         Query query = entityManager.createQuery("SELECT ug.user FROM UserGroup ug WHERE ug.group.id = :groupID");
         query.setParameter("groupID", groupID);
 
+        System.out.println("Before get result list.");
         List<UserGroup> userGroups = query.getResultList();
 
         entityManager.close();
@@ -127,13 +144,15 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public User getUserFromLoginFields(String email, String password) {
+        System.out.println("Before get user from login fields.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get user from login field create query.");
         Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = :email AND u.password = :password");
         query.setParameter("email", email);
         query.setParameter("password", password);
 
-
+        System.out.println("Before get result of query");
         User user = (User) query.getSingleResult();
 
         entityManager.close();
@@ -147,13 +166,16 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public UserGroup addUserGroup(UserGroup userGroup) {
+        System.out.println("Before add user group");
         return (UserGroup) addEntity(userGroup);
     }
 
     @Override
     public List<Group> getAllGroups() {
+        System.out.println("Before get all groups");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get all groups create query");
         List<Group> groups = entityManager.createQuery("SELECT g from Group g").getResultList();
 
         entityManager.close();
@@ -163,8 +185,10 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Group getGroupFromId(int groupID) {
+        System.out.println("Before get group from id.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before find group");
         Group group = entityManager.find(Group.class, groupID);
 
         entityManager.close();
@@ -174,13 +198,16 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Group addGroup(Group group) {
+        System.out.println("Before add group.");
         return (Group) addEntity(group);
     }
 
     @Override
     public List<Racer> getAllRacers() {
+        System.out.println("Before get all racers.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get all racers create query.");
         List<Racer> racers = entityManager.createQuery("SELECT r FROM Racer r ORDER BY r.salary DESC").getResultList();
 
         entityManager.close();
@@ -190,8 +217,10 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Racer getRacerFromId(int racerID) {
+        System.out.println("Before get racer from id.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get racer from id create query.");
         Racer racer = entityManager.find(Racer.class, racerID);
 
         entityManager.close();
@@ -201,8 +230,10 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public List<Racer> getTeamsFromId(int teamID) {
+        System.out.println("Begin get teams from id.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get team from id create query.");
         List<Racer> teams = entityManager.createQuery("SELECT t FROM Racer r INNER JOIN r.team  t ON r.team.id = t.id").getResultList();
 
         entityManager.close();
@@ -212,11 +243,14 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public List<Racer> getRacersFromTeam(int teamID) {
+        System.out.println("Before get racers from team.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get racers from team create query.");
         Query query = entityManager.createQuery("SELECT r FROM Racer r WHERE r.team.id = :teamID");
         query.setParameter("teamID", teamID);
 
+        System.out.println("Before get result.");
         List<Racer> racers = query.getResultList();
 
         entityManager.close();
@@ -226,10 +260,13 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Racer updateRacerSalary(int racerID, int salary) {
+        System.out.println("Before update racer salary.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before find racer.");
         Racer racer = entityManager.find(Racer.class, racerID);
 
+        System.out.println("Before transaction.");
         entityManager.getTransaction().begin();
         racer.setSalary(salary);
         entityManager.getTransaction().commit();
@@ -241,13 +278,16 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Racer addRacer(Racer racer) {
+        System.out.println("Before add racer.");
         return (Racer) addEntity(racer);
     }
 
     @Override
     public List<Team> getAllTeams() {
+        System.out.println("Before get all teams.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get all teams create query.");
         List<Team> teams = entityManager.createQuery("SELECT t FROM Team t ORDER BY t.name").getResultList();
 
         entityManager.close();
@@ -257,8 +297,10 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Team getTeamFromId(int teamID) {
+        System.out.println("Before get team from id.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before find team.");
         Team team = entityManager.find(Team.class, teamID);
 
         entityManager.close();
@@ -268,6 +310,7 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Team addTeam(Team team) {
+        System.out.println("Before add team.");
         return (Team) addEntity(team);
     }
 
@@ -276,11 +319,14 @@ public class RepositoryServiceImpl implements RepositoryService {
         LocalDate localDate = LocalDate.now();
         Date date = new Date(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
 
+        System.out.println("Before get all races.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get all races create query.");
         Query query = entityManager.createQuery("SELECT r FROM Race r where r.endDate > :currentDate ORDER BY r.id");
         query.setParameter("currentDate", date, TemporalType.DATE);
 
+        System.out.println("Before get result");
         List<Race> races = query.getResultList();
         races.remove(0);
 
@@ -294,11 +340,14 @@ public class RepositoryServiceImpl implements RepositoryService {
         LocalDate localDate = LocalDate.now();
         Date date = new Date(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
 
+        System.out.println("Before get current race.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get current race create query.");
         Query query = entityManager.createQuery("SELECT r FROM Race r WHERE r.startDate >= :currentDate");
         query.setParameter("currentDate", date, TemporalType.DATE);
 
+        System.out.println("Before get result");
         Race race = (Race) query.getResultList().get(0);
 
         entityManager.close();
@@ -308,8 +357,10 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Race getRaceFromId(int raceID) {
+        System.out.println("Before get race from id.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before find race.");
         Race race = entityManager.find(Race.class, raceID);
 
         entityManager.close();
@@ -319,11 +370,14 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public List<RacePosition> getRacePositionsFromRace(int raceID) {
+        System.out.println("Before get race positions from race.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before get race positions from race create query.");
         Query query = entityManager.createQuery("SELECT rp FROM RacePosition rp WHERE rp.race.id = :raceID");
         query.setParameter("raceID", raceID);
 
+        System.out.println("Before get result.");
         List<RacePosition> racePositions = query.getResultList();
 
         entityManager.close();
@@ -333,28 +387,75 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Race addRace(Race race) {
+        System.out.println("Before add race.");
         return (Race) addEntity(race);
     }
 
     @Override
     public RacePosition addRacePosition(RacePosition racePosition) {
+        System.out.println("Before add race position.");
         return (RacePosition) addEntity(racePosition);
     }
 
     @Override
+    public Position getPositionFromId(int positionId) {
+        System.out.println("Before get position from id.");
+        EntityManager entityManager = getEntityManager();
+
+        System.out.println("Before find position.");
+        Position position = entityManager.find(Position.class, positionId);
+
+        entityManager.close();
+
+        return position;
+    }
+
+    @Override
     public Position addPosition(Position position) {
+        System.out.println("Before add position.");
         return (Position) addEntity(position);
     }
 
+    @Override
+    public List<MaxPrediction> getAllMaxPredictions() {
+        EntityManager entityManager = getEntityManager();
+
+        List<MaxPrediction> maxPredictions = entityManager.createQuery("SELECT mp FROM MaxPrediction mp", MaxPrediction.class).getResultList();
+
+        entityManager.close();
+
+        return maxPredictions;
+    }
+
+    @Override
+    public MaxPrediction getMaxPredictionsFromId(int userId, int raceId) {
+        EntityManager entityManager = getEntityManager();
+
+        Query query = entityManager.createQuery("SELECT mp FROM MaxPrediction mp WHERE mp.userMax.id = :userId AND mp.raceMax.id= :raceId");
+        query.setParameter("userId", userId);
+        query.setParameter("raceId", raceId);
+
+        MaxPrediction maxPrediction = (MaxPrediction) query.getSingleResult();
+        entityManager.close();
+        return maxPrediction;
+    }
+
+    @Override
+    public MaxPrediction addMaxPrediction(MaxPrediction maxPrediction) {
+        return (MaxPrediction) addEntity(maxPrediction);
+    }
+
     /**
-     * Adds a object to the database. In our case the object will be a user or a group
+     * Adds a object to the database. In our case the object
      *
      * @param object User or Group
      * @return the object
      */
     private Object addEntity(Object object) {
+        System.out.println("Before add entity.");
         EntityManager entityManager = getEntityManager();
 
+        System.out.println("Before transaction.");
         entityManager.getTransaction().begin();
         entityManager.persist(object);
         entityManager.getTransaction().commit();
@@ -454,28 +555,6 @@ public class RepositoryServiceImpl implements RepositoryService {
         Group group3 = new Group("Work");
         addGroup(group3);
 
-        // Adds usergroups
-        UserGroup usergroup1 = new UserGroup(13, "admin", lorenzo, group1);
-        addUserGroup(usergroup1);
-        UserGroup usergroup2 = new UserGroup(5, "member", luuk, group1);
-        addUserGroup(usergroup2);
-        UserGroup usergroup3 = new UserGroup(8, "member", janWillem, group1);
-        addUserGroup(usergroup3);
-        UserGroup usergroup4 = new UserGroup(19, "admin", luuk, group2);
-        addUserGroup(usergroup4);
-        UserGroup usergroup5 = new UserGroup(11, "member", lorenzo, group2);
-        addUserGroup(usergroup5);
-        UserGroup usergroup6 = new UserGroup(4, "member", hugo, group2);
-        addUserGroup(usergroup6);
-        UserGroup usergroup7 = new UserGroup(10, "admin", janWillem, group3);
-        addUserGroup(usergroup7);
-        UserGroup usergroup8 = new UserGroup(1, "member", lorenzo, group3);
-        addUserGroup(usergroup8);
-        UserGroup usergroup9 = new UserGroup(0, "member", luuk, group3);
-        addUserGroup(usergroup9);
-        UserGroup usergroup10 = new UserGroup(0, "member", hugo, group3);
-        addUserGroup(usergroup10);
-
         // TODO: Adds races
         Race usa = new Race("FORMULA 1 PIRELLI 2018 UNITED STATES GRAND PRIX", "USA", new Date(2018, 9, 19), new Date(2018, 9, 21));
         addRace(usa);
@@ -491,6 +570,48 @@ public class RepositoryServiceImpl implements RepositoryService {
         addRace(bahrain);
         Race china = new Race("FORMULA 1 2019 China Shanghai GRAND PRIX", "Shanghai", new Date(2019, 3, 14), new Date(2019, 3, 16));
         addRace(china);
+
+        // Adds usergroups
+        UserGroup usergroup1 = new UserGroup(13, "admin", lorenzo, group1, abuDhabi);usergroup1.setBudget(9000000);addUserGroup(usergroup1);
+        UserGroup usergroup2 = new UserGroup(5, "member", luuk, group1, abuDhabi);usergroup2.setBudget(2000000);addUserGroup(usergroup2);
+        UserGroup usergroup3 = new UserGroup(8, "member", janWillem, group1, abuDhabi);usergroup3.setBudget(4000000);addUserGroup(usergroup3);
+        UserGroup usergroup4 = new UserGroup(19, "admin", luuk, group2, abuDhabi);usergroup4.setBudget(8000000);addUserGroup(usergroup4);
+        UserGroup usergroup5 = new UserGroup(11, "member", lorenzo, group2, abuDhabi);usergroup5.setBudget(9000000);addUserGroup(usergroup5);
+        UserGroup usergroup6 = new UserGroup(4, "member", hugo, group2, abuDhabi);usergroup6.setBudget(11000000);addUserGroup(usergroup6);
+        UserGroup usergroup7 = new UserGroup(10, "admin", janWillem, group3, abuDhabi);usergroup7.setBudget(14000000);addUserGroup(usergroup7);
+        UserGroup usergroup8 = new UserGroup(1, "member", lorenzo, group3, abuDhabi);usergroup8.setBudget(15000000);addUserGroup(usergroup8);
+        UserGroup usergroup9 = new UserGroup(0, "member", luuk, group3, abuDhabi);usergroup9.setBudget(6000000);addUserGroup(usergroup9);
+        UserGroup usergroup10 = new UserGroup(0, "member", hugo, group3, abuDhabi);usergroup10.setBudget(2000000);addUserGroup(usergroup10);
+         usergroup1 = new UserGroup(15, "admin", lorenzo, group1, australia);usergroup1.setBudget(0);addUserGroup(usergroup1);
+         usergroup2 = new UserGroup(8, "member", luuk, group1, australia);usergroup2.setBudget(4000000);addUserGroup(usergroup2);
+         usergroup3 = new UserGroup(1, "member", janWillem, group1, australia);usergroup3.setBudget(5000000);addUserGroup(usergroup3);
+         usergroup4 = new UserGroup(9, "admin", luuk, group2, australia);usergroup4.setBudget(8000000);addUserGroup(usergroup4);
+         usergroup5 = new UserGroup(21, "member", lorenzo, group2, australia);usergroup5.setBudget(9000000);addUserGroup(usergroup5);
+         usergroup6 = new UserGroup(7, "member", hugo, group2, australia);usergroup6.setBudget(9000000);addUserGroup(usergroup6);
+         usergroup7 = new UserGroup(53, "admin", janWillem, group3, australia);usergroup7.setBudget(7000000);addUserGroup(usergroup7);
+         usergroup8 = new UserGroup(2, "member", lorenzo, group3, australia);usergroup8.setBudget(9000000);addUserGroup(usergroup8);
+         usergroup9 = new UserGroup(18, "member", luuk, group3, australia);usergroup9.setBudget(1000000);addUserGroup(usergroup9);
+         usergroup10 = new UserGroup(13, "member", hugo, group3, australia);usergroup10.setBudget(0);addUserGroup(usergroup10);
+         usergroup1 = new UserGroup(1, "admin", lorenzo, group1, mexico);usergroup1.setBudget(10000000);addUserGroup(usergroup1);
+         usergroup2 = new UserGroup(9, "member", luuk, group1, mexico);usergroup2.setBudget(12000000);addUserGroup(usergroup2);
+         usergroup3 = new UserGroup(25, "member", janWillem, group1, mexico);usergroup3.setBudget(0);addUserGroup(usergroup3);
+         usergroup4 = new UserGroup(53, "admin", luuk, group2, mexico);usergroup4.setBudget(13000000);addUserGroup(usergroup4);
+         usergroup5 = new UserGroup(7, "member", lorenzo, group2, mexico);usergroup5.setBudget(2000000);addUserGroup(usergroup5);
+         usergroup6 = new UserGroup(3, "member", hugo, group2, mexico);usergroup6.setBudget(5000000);addUserGroup(usergroup6);
+         usergroup7 = new UserGroup(18, "admin", janWillem, group3, mexico);usergroup7.setBudget(0);addUserGroup(usergroup7);
+         usergroup8 = new UserGroup(14, "member", lorenzo, group3, mexico);usergroup8.setBudget(11000000);addUserGroup(usergroup8);
+         usergroup9 = new UserGroup(34, "member", luuk, group3, mexico);usergroup9.setBudget(0);addUserGroup(usergroup9);
+         usergroup10 = new UserGroup(23, "member", hugo, group3, mexico);usergroup10.setBudget(10000000);addUserGroup(usergroup10);
+         usergroup1 = new UserGroup(44, "admin", lorenzo, group1, brazil);usergroup1.setBudget(8000000);addUserGroup(usergroup1);
+         usergroup2 = new UserGroup(5, "member", luuk, group1, brazil);usergroup2.setBudget(0);addUserGroup(usergroup2);
+         usergroup3 = new UserGroup(6, "member", janWillem, group1, brazil);usergroup3.setBudget(3000000);addUserGroup(usergroup3);
+         usergroup4 = new UserGroup(20, "admin", luuk, group2, brazil);usergroup4.setBudget(0);addUserGroup(usergroup4);
+         usergroup5 = new UserGroup(7, "member", lorenzo, group2, brazil);usergroup5.setBudget(7000000);addUserGroup(usergroup5);
+         usergroup6 = new UserGroup(19, "member", hugo, group2, brazil);usergroup6.setBudget(5000000);addUserGroup(usergroup6);
+         usergroup7 = new UserGroup(34, "admin", janWillem, group3, brazil);usergroup7.setBudget(1000000);addUserGroup(usergroup7);
+         usergroup8 = new UserGroup(19, "member", lorenzo, group3, brazil);usergroup8.setBudget(2000000);addUserGroup(usergroup8);
+         usergroup9 = new UserGroup(5, "member", luuk, group3, brazil);usergroup9.setBudget(0);addUserGroup(usergroup9);
+         usergroup10 = new UserGroup(1, "member", hugo, group3, brazil);usergroup10.setBudget(9000000);addUserGroup(usergroup10);
 
         // TODO: Adds positions
         Position first = new Position("First");
@@ -618,5 +739,14 @@ public class RepositoryServiceImpl implements RepositoryService {
         addRacePosition(abudhabi19);
         RacePosition abudhabi20 = new RacePosition(usa, magnussen, twelfth, 1, 34, 732, none, 1, 35, 59, 300, 0, dq);
         addRacePosition(abudhabi20);
+
+//        MaxPrediction mp1 = new MaxPrediction(luuk, abuDhabi, second);
+//        addMaxPrediction(mp1);
+//        MaxPrediction mp2 = new MaxPrediction(lorenzo, abuDhabi, first);
+//        addMaxPrediction(mp2);
+//        MaxPrediction mp3 = new MaxPrediction(janWillem, abuDhabi, tenth);
+//        addMaxPrediction(mp3);
+//        MaxPrediction mp4 = new MaxPrediction(hugo, abuDhabi, fifteenth);
+//        addMaxPrediction(mp4);
     }
 }

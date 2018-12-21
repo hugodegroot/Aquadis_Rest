@@ -1,6 +1,7 @@
 package com.aquadis.models;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import static org.junit.Assert.*;
  */
 public class UserTest {
 
-    private User user;
+    private static User user;
 
     @Before
     public void setUp() {
@@ -69,7 +70,6 @@ public class UserTest {
     public void getPasswordReturnPassword() {
         String expected = "lorenzo123";
         String result = user.getPassword();
-
         assertThat("Not the correct password!", expected, is(result));
     }
 
@@ -83,7 +83,7 @@ public class UserTest {
     @Test
     public void getAdminStatusReturnStatus() {
         int expected = 1;
-        int result = user.getAdminStatus();
+        int result = user.getIsAdmin();
 
         assertThat("This user is an admin!", expected, is(result));
     }

@@ -19,7 +19,9 @@ public class UserResource {
     private RepositoryService service;
 
     public UserResource() {
+        System.out.println("Before user resource.");
         service = RepositoryServiceImpl.getInstance();
+        System.out.println("After user resource.");
     }
 
     /**
@@ -31,6 +33,7 @@ public class UserResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getAllUsers() {
+        System.out.println("Before get all users.");
         return service.getAllUsers();
     }
 
@@ -45,13 +48,16 @@ public class UserResource {
     @Path("/{userID}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserFromID(@PathParam("userID") int userID) {
+        System.out.println("Find user with id " + userID);
         User user = service.getUserFromId(userID);
 
+        System.out.println("Check if user exist.");
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(new ClientError("Cannot find user with id: " + userID)).build();
         }
 
+        System.out.println("Build user.");
         return Response.status(Response.Status.OK)
                 .entity(user).build();
     }
@@ -67,14 +73,16 @@ public class UserResource {
     public Response getUsers(
             @QueryParam("email") String email,
             @QueryParam("password") String password) {
-
+        System.out.println("Before get user from login fields");
         User user = service.getUserFromLoginFields(email, password);
 
+        System.out.println("Check user.");
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(new ClientError("Cannot find user with email: " + email + "and password: " + password)).build();
         }
 
+        System.out.println("Build user.");
         return Response.status(Response.Status.OK)
                 .entity(user).build();
 
@@ -117,6 +125,7 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public User addUser(User user) {
+        System.out.println("Before add user.");
         return service.addUser(user);
     }
 
@@ -128,6 +137,7 @@ public class UserResource {
      */
     @Path("/{userID}/ug")
     public UserGroupResource getUserGroupResource() {
+        System.out.println("Creat new user group.");
         return new UserGroupResource();
     }
 }

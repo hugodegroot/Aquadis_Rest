@@ -4,8 +4,11 @@
         <Arg>
             <New class="org.apache.commons.dbcp2.BasicDataSource">
                 <Set name="driverClassName">com.mysql.jdbc.Driver</Set>
+                <!--<Set name="url">jdbc:mysql://localhost:3306/aquadis?createDatabaseIfNotExist=true&amp;serverTimezone=CET</Set>-->
                 <Set name="url">jdbc:mysql://oege.ie.hva.nl:3306/zgoedhal0031?createDatabaseIfNotExist=true&amp;serverTimezone=CET</Set>
+                <!--<Set name="username">root</Set>-->
                 <Set name="username">goedhal0031</Set>
+                <!--<Set name="password">root</Set>-->
                 <Set name="password">Cc1$m8FubtIzX5</Set>
                 <Set name="validationQuery">SELECT 1</Set>
             </New>

@@ -19,7 +19,9 @@ public class GroupResource {
     private RepositoryService service;
 
     public GroupResource() {
+        System.out.println("Before group resource");
         service = RepositoryServiceImpl.getInstance();
+        System.out.println("After group resource");
     }
 
     /**
@@ -31,6 +33,7 @@ public class GroupResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Group> getAllGroups() {
+        System.out.println("Before get all groups");
         return service.getAllGroups();
     }
 
@@ -45,13 +48,16 @@ public class GroupResource {
     @Path("/{groupID}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getGroupFromID(@PathParam("groupID") int groupID) {
+        System.out.println("Before get group from id");
         Group group = service.getGroupFromId(groupID);
 
+        System.out.println("Check if group exists");
         if (group == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(new ClientError("Cannot find user with id: " + groupID)).build();
         }
 
+        System.out.println("Build group");
         return Response.status(Response.Status.OK)
                 .entity(group).build();
     }
@@ -75,6 +81,7 @@ public class GroupResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Group addGroup(Group group) {
+        System.out.println("Before add group");
         return service.addGroup(group);
     }
 
@@ -86,6 +93,7 @@ public class GroupResource {
      */
     @Path("/{groupID}/ug")
     public UserGroupResource getUserGroupResource() {
+        System.out.println("Create new user group");
         return new UserGroupResource();
     }
 }
