@@ -40,11 +40,17 @@ public class UserGroup {
     @JoinColumn(name = "group_id")
     private Group group;
 
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "race_id")
+    private Race race;
+
+    private String raceName;
 
     public UserGroup() {
     }
 
-    public UserGroup(int points, String role, User user, Group group) {
+    public UserGroup(int points, String role, User user, Group group, Race race) {
         setPoints(points);
         setRole(role);
         setBudget(START_BUDGET);
@@ -52,6 +58,8 @@ public class UserGroup {
         setLastName(user.getLastName());
         setUser(user);
         setGroup(group);
+        setRace(race);
+        setRaceName(race.getName());
     }
 
     public int getId() {
@@ -82,7 +90,7 @@ public class UserGroup {
         return budget;
     }
 
-    private void setBudget(int budget) {
+    public void setBudget(int budget) {
         this.budget = budget;
     }
 
@@ -116,5 +124,21 @@ public class UserGroup {
 
     private void setGroup(Group group) {
         this.group = group;
+    }
+
+    public Race getRace() {
+        return race;
+    }
+
+    private void setRace(Race race) {
+        this.race = race;
+    }
+
+    public String getRaceName() {
+        return raceName;
+    }
+
+    private void setRaceName(String raceName) {
+        this.raceName = raceName;
     }
 }

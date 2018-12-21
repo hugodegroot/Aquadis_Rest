@@ -23,12 +23,15 @@ public class TeamResource {
     private RepositoryService service;
 
     public TeamResource() {
+        System.out.println("Before team resource");
         service = RepositoryServiceImpl.getInstance();
+        System.out.println("After team resource");
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Team> getAllTeams() {
+        System.out.println("Before get all teams");
         return service.getAllTeams();
     }
 
@@ -36,13 +39,16 @@ public class TeamResource {
     @Path("/{teamID}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTeamFromId(@PathParam("teamID") int teamID) {
+        System.out.println("Before get team from id");
         Team team = service.getTeamFromId(teamID);
 
+        System.out.println("Checks if team exists");
         if (team == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(new ClientError("Cannot find team with id: " + teamID)).build();
         }
 
+        System.out.println("Build team");
         return Response.status(Response.Status.OK).entity(team).build();
     }
 
@@ -50,15 +56,19 @@ public class TeamResource {
     @Path("/{teamID}/racers")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRacersFromTeam(@PathParam("teamID") int teamID) {
+        System.out.println("Before get team from id");
         Team team = service.getTeamFromId(teamID);
 
+        System.out.println("Check if team exists");
         if (team == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(new ClientError("Cannot find team with id: " + teamID)).build();
         }
 
+        System.out.println("Before get racers from team");
         List<Racer> racers = service.getRacersFromTeam(teamID);
 
+        System.out.println("Build racers");;
         return Response.status(Response.Status.OK).entity(racers).build();
     }
 }
