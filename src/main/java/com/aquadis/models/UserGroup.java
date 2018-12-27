@@ -17,6 +17,10 @@ public class UserGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private int userId;
+    private int groupId;
+    private int raceId;
+
     @Column(name = "points")
     private int points;
 
@@ -51,6 +55,9 @@ public class UserGroup {
     }
 
     public UserGroup(int points, String role, User user, Group group, Race race) {
+        setUserId(user.getId());
+        setGroupId(group.getId());
+        setRaceId(race.getId());
         setPoints(points);
         setRole(role);
         setBudget(START_BUDGET);
@@ -68,6 +75,30 @@ public class UserGroup {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    private void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    private void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public int getRaceId() {
+        return raceId;
+    }
+
+    private void setRaceId(int raceId) {
+        this.raceId = raceId;
     }
 
     public int getPoints() {
