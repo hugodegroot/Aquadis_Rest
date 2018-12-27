@@ -17,6 +17,10 @@ public class UserGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private int userId;
+    private int groupId;
+    private int raceId;
+
     @Column(name = "points")
     private int points;
 
@@ -40,11 +44,20 @@ public class UserGroup {
     @JoinColumn(name = "group_id")
     private Group group;
 
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "race_id")
+    private Race race;
+
+    private String raceName;
 
     public UserGroup() {
     }
 
-    public UserGroup(int points, String role, User user, Group group) {
+    public UserGroup(int points, String role, User user, Group group, Race race) {
+        setUserId(user.getId());
+        setGroupId(group.getId());
+        setRaceId(race.getId());
         setPoints(points);
         setRole(role);
         setBudget(START_BUDGET);
@@ -52,6 +65,8 @@ public class UserGroup {
         setLastName(user.getLastName());
         setUser(user);
         setGroup(group);
+        setRace(race);
+        setRaceName(race.getName());
     }
 
     public int getId() {
@@ -60,6 +75,30 @@ public class UserGroup {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    private void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    private void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public int getRaceId() {
+        return raceId;
+    }
+
+    private void setRaceId(int raceId) {
+        this.raceId = raceId;
     }
 
     public int getPoints() {
@@ -82,7 +121,7 @@ public class UserGroup {
         return budget;
     }
 
-    private void setBudget(int budget) {
+    public void setBudget(int budget) {
         this.budget = budget;
     }
 
@@ -116,5 +155,21 @@ public class UserGroup {
 
     private void setGroup(Group group) {
         this.group = group;
+    }
+
+    public Race getRace() {
+        return race;
+    }
+
+    private void setRace(Race race) {
+        this.race = race;
+    }
+
+    public String getRaceName() {
+        return raceName;
+    }
+
+    private void setRaceName(String raceName) {
+        this.raceName = raceName;
     }
 }

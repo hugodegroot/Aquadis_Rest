@@ -1,5 +1,9 @@
 package com.aquadis.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -28,10 +32,21 @@ public class Race {
     private Date endDate;
 
     @OneToMany(mappedBy = "race", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<RacePosition> positions;
 
-//    @OneToMany(mappedBy = "raceMax", fetch = FetchType.EAGER)
-//    private List<MaxPositionPrediction> maxPositionPredictions;
+    @OneToMany(mappedBy = "race", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<UserGroup> users;
+
+    @OneToMany(mappedBy = "race", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<UserGroup> groups;
+
+    @OneToMany(mappedBy = "raceMax", fetch = FetchType.EAGER)
+//    @Fetch(value = FetchMode.SUBSELECT)
+    private List<MaxPrediction> maxPositionPredictions;
 
     public Race() {
     }
@@ -91,11 +106,27 @@ public class Race {
         this.positions = positions;
     }
 
-//    public List<MaxPositionPrediction> getMaxPositionPredictions() {
-//        return maxPositionPredictions;
-//    }
-//
-//    public void setMaxPositionPredictions(List<MaxPositionPrediction> maxPositionPredictions) {
-//        this.maxPositionPredictions = maxPositionPredictions;
-//    }
+    public List<UserGroup> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserGroup> users) {
+        this.users = users;
+    }
+
+    public List<UserGroup> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<UserGroup> groups) {
+        this.groups = groups;
+    }
+
+    public List<MaxPrediction> getMaxPositionPredictions() {
+        return maxPositionPredictions;
+    }
+
+    public void setMaxPositionPredictions(List<MaxPrediction> maxPositionPredictions) {
+        this.maxPositionPredictions = maxPositionPredictions;
+    }
 }

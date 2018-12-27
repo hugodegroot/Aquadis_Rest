@@ -226,8 +226,39 @@ public interface RepositoryService {
 
     /**
      *
+     * @param positionId
+     * @return
+     */
+    Position getPositionFromId(int positionId);
+
+    /**
+     *
      * @param position
      * @return
      */
     Position addPosition(Position position);
+
+    // Max prediction methods
+
+    /**
+     *
+     * @return
+     */
+    List<MaxPrediction> getAllMaxPredictions();
+
+    /**
+     *
+     * @param userId
+     * @param raceId
+     * @return
+     */
+    MaxPrediction getMaxPredictionsFromId(int userId, int raceId);
+
+    /**
+     *
+     * @param maxPrediction
+     * @return
+     */
+    MaxPrediction addMaxPrediction(MaxPrediction maxPrediction);
+
 }
