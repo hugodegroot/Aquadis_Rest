@@ -106,6 +106,12 @@ public interface RepositoryService {
     Group getGroupFromId(int groupID);
 
     /**
+     *
+     * @return
+     */
+    Group getLastAddedGroup();
+
+    /**
      * Adding a group into the database
      *
      * @param group

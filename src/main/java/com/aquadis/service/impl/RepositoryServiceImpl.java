@@ -197,6 +197,15 @@ public class RepositoryServiceImpl implements RepositoryService {
     }
 
     @Override
+    public Group getLastAddedGroup() {
+        EntityManager entityManager = getEntityManager();
+
+        Group group = (Group)entityManager.createQuery("select g from Group g order by g.id desc ").setMaxResults(1).getSingleResult();
+        System.out.println("group.getName() = " + group.getName());
+        return group;
+    }
+
+    @Override
     public Group addGroup(Group group) {
         System.out.println("Before add group.");
         return (Group) addEntity(group);

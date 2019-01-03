@@ -1,12 +1,14 @@
 package com.aquadis.rest.resources;
 
 import com.aquadis.models.Group;
+import com.aquadis.models.Race;
 import com.aquadis.models.User;
 import com.aquadis.models.UserGroup;
 import com.aquadis.rest.model.ClientError;
 import com.aquadis.service.RepositoryService;
 import com.aquadis.service.impl.RepositoryServiceImpl;
 
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -35,7 +37,17 @@ public class UserGroupResource {
     @Path("/usergroup")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public UserGroup addUserGroup(UserGroup userGroup){
+    public UserGroup addUserGroup(JsonObject jsonObject){
+
+        int userId = jsonObject.getInt("userId");
+        int raceId = jsonObject.getInt("raceId");
+
+        User user = service.getUserFromId(userId);
+        Group group = service.getLastAddedGroup();
+        Race race = service.getRaceFromId(raceId);
+
+        UserGroup userGroup = new UserGroup(0, "admin", user, group, race);
+
         System.out.println("Before add usergroup");
         return service.addUserGroup(userGroup);
     }
