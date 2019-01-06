@@ -8,8 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -20,16 +18,18 @@ import static org.hamcrest.core.Is.is;
 @Ignore
 public class UserResourceTest {
 
+    private static RepositoryService service;
+
     @BeforeClass
     public static void setUp() {
+        service = RepositoryServiceImpl.getInstance();
     }
 
     @Test
-    @Ignore
     public void getAllUsersReturnsAllUsers() {
         int numberOfUsers = 4;
-//        List<User> users = userResource.getAllUsers();
-
-//        Assert.assertThat("Not all the user are gotten", numberOfUsers, is(users.size()));
+        List<User> users = service.getAllUsers();
+        System.out.println("WTF WRM DOET DIT DING T NIT");
+        Assert.assertThat("Not all the user are gotten", numberOfUsers, is(users.size()));
     }
 }
